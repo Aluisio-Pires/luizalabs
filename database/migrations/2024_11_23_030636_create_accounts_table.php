@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
-            $table->bigInteger('balance')->default(0);//Valor em Microns
-            $table->bigInteger('credit_limit')->default(0);//Valor em Microns
+            $table->bigInteger('balance')->default(0); //Valor em Microns
+            $table->bigInteger('credit_limit')->default(0); //Valor em Microns
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

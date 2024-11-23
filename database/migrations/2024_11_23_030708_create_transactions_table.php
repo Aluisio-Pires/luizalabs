@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->text('message')->nullable();
 
-            $table->bigInteger('amount')->default(0);//Valor em Microns
-            $table->bigInteger('fee')->default(0);//Valor em Microns
-            $table->bigInteger('total')->default(0);//Valor em Microns
+            $table->bigInteger('amount')->default(0); //Valor em Microns
+            $table->bigInteger('fee')->default(0); //Valor em Microns
+            $table->bigInteger('total')->default(0); //Valor em Microns
 
             $table->foreignIdFor(TransactionType::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Account::class)->nullable()->constrained()->nullOnDelete();

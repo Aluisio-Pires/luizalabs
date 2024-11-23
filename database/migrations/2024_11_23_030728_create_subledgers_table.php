@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('description')->nullable();
-            $table->bigInteger('value')->default(0);//Valor em Microns
+            $table->bigInteger('value')->default(0); //Valor em Microns
 
             $table->foreignIdFor(Ledger::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Transaction::class)->constrained()->onDelete('cascade');

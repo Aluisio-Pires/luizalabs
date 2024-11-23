@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->enum('type', ['fixed', 'percentage']);
-            $table->bigInteger('value')->default(0);//Valor em Microns
+            $table->bigInteger('value')->default(0); //Valor em Microns
 
             $table->foreignIdFor(TransactionType::class)->constrained()->onDelete('cascade');
             $table->timestamps();

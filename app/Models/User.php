@@ -18,10 +18,10 @@ class User extends Authenticatable
 
     /** @use HasFactory<UserFactory> */
     use HasFactory;
-    use SoftDeletes;
 
     use HasProfilePhoto;
     use Notifiable;
+    use SoftDeletes;
     use TwoFactorAuthenticatable;
 
     /**
