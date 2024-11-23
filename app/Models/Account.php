@@ -13,7 +13,6 @@ class Account extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'number',
         'balance',
         'credit_limit',
         'user_id',

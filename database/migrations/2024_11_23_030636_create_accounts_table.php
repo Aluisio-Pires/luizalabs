@@ -14,12 +14,14 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('number')->unique();
+            $table->unsignedBigInteger('number', true)->startingValue(1000000);
             $table->bigInteger('balance')->default(0); //Valor em Microns
             $table->bigInteger('credit_limit')->default(0); //Valor em Microns
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 
