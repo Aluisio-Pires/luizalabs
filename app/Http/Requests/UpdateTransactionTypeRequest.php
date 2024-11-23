@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateTransactionTypeRequest extends FormRequest
 {
@@ -11,18 +13,26 @@ class UpdateTransactionTypeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
+        $transactionTypeId = $this->route('transaction_type')->id ?? null;
+
         return [
-            //
+            'name' => [
+                'sometimes',
+                'string',
+                'max:255',
+                Rule::unique('transaction_types', 'name')->ignore($transactionTypeId),
+            ],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

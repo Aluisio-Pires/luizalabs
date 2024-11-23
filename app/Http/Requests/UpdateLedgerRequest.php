@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateLedgerRequest extends FormRequest
 {
@@ -11,18 +13,26 @@ class UpdateLedgerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
+        $ledgerId = $this->route('ledger')->id ?? null;
+
         return [
-            //
+            'name' => [
+                'sometimes',
+                'string',
+                'max:255',
+                Rule::unique('ledgers', 'name')->ignore($ledgerId),
+            ],
+            'description' => ['sometimes', 'nullable', 'string', 'max:1000'],
         ];
     }
 }
