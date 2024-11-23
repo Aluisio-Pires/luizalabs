@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->foreignIdFor(TransactionType::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Account::class)->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('destination_account_id')->nullable()->constrained('accounts')->nullOnDelete();
+            $table->foreignId('payee_id')->nullable()->constrained('accounts')->nullOnDelete();
             $table->timestamps();
         });
     }
