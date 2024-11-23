@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text('description')->nullable();
             $table->string('type')->nullable();
+            $table->string('status')->nullable();
+            $table->text('message')->nullable();
 
             $table->bigInteger('amount')->default(0);//Valor em Microns
             $table->bigInteger('fee')->default(0);//Valor em Microns
