@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Account>
+ * @extends Factory<Account>
  */
 class AccountFactory extends Factory
 {
@@ -17,7 +19,11 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'number' => round(microtime(true) * 1000).$this->faker->numberBetween(0, 1000000),
+            'balance' => $this->faker->numberBetween(0, 1000000),
+            'credit_limit' => $this->faker->numberBetween(0, 500000),
+            'user_id' => User::factory(),
+            'deleted_at' => null,
         ];
     }
 }
