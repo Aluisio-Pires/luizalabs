@@ -12,7 +12,7 @@ class SubledgerPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -20,7 +20,7 @@ class SubledgerPolicy
      */
     public function view(User $user, Subledger $subledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -28,7 +28,7 @@ class SubledgerPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -36,7 +36,7 @@ class SubledgerPolicy
      */
     public function update(User $user, Subledger $subledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -44,7 +44,7 @@ class SubledgerPolicy
      */
     public function delete(User $user, Subledger $subledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ class SubledgerPolicy
      */
     public function restore(User $user, Subledger $subledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -60,6 +60,6 @@ class SubledgerPolicy
      */
     public function forceDelete(User $user, Subledger $subledger): bool
     {
-        //
+        return false;
     }
 }

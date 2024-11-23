@@ -12,7 +12,7 @@ class FeePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -20,7 +20,7 @@ class FeePolicy
      */
     public function view(User $user, Fee $fee): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -28,7 +28,7 @@ class FeePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -36,7 +36,7 @@ class FeePolicy
      */
     public function update(User $user, Fee $fee): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -44,7 +44,7 @@ class FeePolicy
      */
     public function delete(User $user, Fee $fee): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ class FeePolicy
      */
     public function restore(User $user, Fee $fee): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -60,6 +60,6 @@ class FeePolicy
      */
     public function forceDelete(User $user, Fee $fee): bool
     {
-        //
+        return false;
     }
 }

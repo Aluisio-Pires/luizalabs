@@ -12,7 +12,7 @@ class TransactionTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -20,7 +20,7 @@ class TransactionTypePolicy
      */
     public function view(User $user, TransactionType $transactionType): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -28,7 +28,7 @@ class TransactionTypePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -36,7 +36,7 @@ class TransactionTypePolicy
      */
     public function update(User $user, TransactionType $transactionType): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -44,7 +44,7 @@ class TransactionTypePolicy
      */
     public function delete(User $user, TransactionType $transactionType): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ class TransactionTypePolicy
      */
     public function restore(User $user, TransactionType $transactionType): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -60,6 +60,6 @@ class TransactionTypePolicy
      */
     public function forceDelete(User $user, TransactionType $transactionType): bool
     {
-        //
+        return false;
     }
 }

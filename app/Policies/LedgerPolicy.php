@@ -12,7 +12,7 @@ class LedgerPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -20,7 +20,7 @@ class LedgerPolicy
      */
     public function view(User $user, Ledger $ledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -28,7 +28,7 @@ class LedgerPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -36,7 +36,7 @@ class LedgerPolicy
      */
     public function update(User $user, Ledger $ledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -44,7 +44,7 @@ class LedgerPolicy
      */
     public function delete(User $user, Ledger $ledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ class LedgerPolicy
      */
     public function restore(User $user, Ledger $ledger): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -60,6 +60,6 @@ class LedgerPolicy
      */
     public function forceDelete(User $user, Ledger $ledger): bool
     {
-        //
+        return false;
     }
 }
