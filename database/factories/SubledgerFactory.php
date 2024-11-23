@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Ledger;
+use App\Models\Subledger;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subledger>
+ * @extends Factory<Subledger>
  */
 class SubledgerFactory extends Factory
 {
@@ -17,7 +20,11 @@ class SubledgerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->word(),
+            'description' => $this->faker->sentence(),
+            'value' => $this->faker->numberBetween(10000, 100000000),
+            'ledger_id' => Ledger::factory(),
+            'transaction_id' => Transaction::factory(),
         ];
     }
 }

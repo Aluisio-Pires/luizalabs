@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\TransactionType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TransactionType>
+ * @extends Factory<TransactionType>
  */
 class TransactionTypeFactory extends Factory
 {
@@ -17,7 +18,8 @@ class TransactionTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->randomElement(['Deposito', 'Saque', 'Transferencia']),
+            'description' => $this->faker->sentence(),
         ];
     }
 }

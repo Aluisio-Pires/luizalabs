@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
+use App\Models\Transaction;
+use App\Models\TransactionType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+ * @extends Factory<Transaction>
  */
 class TransactionFactory extends Factory
 {
@@ -16,8 +19,21 @@ class TransactionFactory extends Factory
      */
     public function definition(): array
     {
+        $amount = $this->faker->numberBetween(1000, 100000);
+        $fee = $this->faker->numberBetween(0, 1000);
+        $total = $amount + $fee;
+
         return [
-            //
+            'description' => $this->faker->sentence(),
+            'type' => $this->faker->randomElement(['deposito', 'saque', 'transferencia']),
+            'status' => $this->faker->randomElement(['pendente', 'sucesso', 'falha']),
+            'message' => $this->faker->optional()->sentence(),
+            'amount' => $amount,
+            'fee' => $fee,
+            'total' => $total,
+            'transaction_type_id' => TransactionType::factory(),
+            'account_id' => Account::factory(),
+            'destination_account_id' => Account::factory(),
         ];
     }
 }
