@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Micron;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +23,12 @@ class Transaction extends Model
         'transaction_type_id',
         'account_id',
         'payee_id',
+    ];
+
+    protected $casts = [
+        'amount' => Micron::class,
+        'fee' => Micron::class,
+        'total' => Micron::class,
     ];
 
     public function transactionType(): BelongsTo

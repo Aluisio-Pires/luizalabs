@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Micron;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,10 @@ class Subledger extends Model
         'value',
         'ledger_id',
         'transaction_id',
+    ];
+
+    protected $casts = [
+        'value' => Micron::class,
     ];
 
     public function ledger(): BelongsTo
