@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->text('description')->nullable();
-            $table->string('type')->nullable();
-            $table->string('status')->nullable();
+            $table->string('type');
+            $table->string('status');
             $table->text('message')->nullable();
 
             $table->bigInteger('amount')->default(0); //Valor em Microns

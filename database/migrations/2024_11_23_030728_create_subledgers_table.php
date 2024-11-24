@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('subledgers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('value')->default(0); //Valor em Microns
 
