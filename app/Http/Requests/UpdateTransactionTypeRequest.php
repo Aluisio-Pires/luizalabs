@@ -32,6 +32,12 @@ class UpdateTransactionTypeRequest extends FormRequest
                 'max:255',
                 Rule::unique('transaction_types', 'name')->ignore($transactionTypeId),
             ],
+            'slug' => [
+                'sometimes',
+                'string',
+                'max:255',
+                Rule::unique('transaction_types', 'name')->ignore($transactionTypeId),
+            ],
             'description' => ['nullable', 'string'],
         ];
     }

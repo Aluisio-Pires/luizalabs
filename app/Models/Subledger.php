@@ -12,7 +12,6 @@ class Subledger extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'description',
         'value',
         'ledger_id',

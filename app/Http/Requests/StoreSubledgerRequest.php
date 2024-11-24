@@ -23,7 +23,6 @@ class StoreSubledgerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:subledgers,name', 'max:255'],
             'description' => ['nullable', 'string', 'max:1000'],
             'value' => ['required', 'decimal:2', 'min:0'],
             'ledger_id' => ['required', 'exists:ledgers,id'],
