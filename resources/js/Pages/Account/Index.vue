@@ -16,7 +16,11 @@ defineProps({
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight my-auto">
                     Contas
                 </h2>
-                <Link :href="route('accounts.create')" class="bg-green-500 text-white py-2 px-4 rounded">
+                <Link :href="route('accounts.create')"
+                      class="bg-green-500 text-white py-2 px-4 rounded"
+                      prefetch="mount"
+                      :cacheFor="['30m', '30m']"
+                >
                     Criar Conta
                 </Link>
             </div>

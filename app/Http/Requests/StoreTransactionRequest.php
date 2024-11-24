@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Account;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreTransactionRequest extends FormRequest
 {
@@ -24,16 +26,49 @@ class StoreTransactionRequest extends FormRequest
     {
         return [
             'description' => ['nullable', 'string'],
-            'type' => ['required', 'string', 'max:255'],
-            'message' => ['nullable', 'string'],
-            'amount' => ['required', 'integer', 'min:0'],
-            'transaction_type_id' => ['required', 'exists:transaction_types,id'],
-            'account_id' => ['required', 'exists:accounts,id'],
-            'destination_account_id' => [
+            'type' => ['required', 'string', 'max:255', 'exists:transaction_types,slug'],
+            'amount' => ['required', 'decimal:2', 'min:0'],
+            'account_number' => [
+                'required',
+                'integer',
+                'exists:accounts,number',
+                function ($attribute, $value, $fail): void {
+                    $userId = Auth::id();
+                    $account = Account::where('number', $value)
+                        ->where('user_id', $userId)
+                        ->first();
+
+                    if (! $account) {
+                        $fail('A conta selecionada não pertence ao usuário autenticado.');
+                    }
+                },
+            ],
+            'payee_number' => [
+                'nullable',
+                'integer',
                 'required_if:type,transferencia',
-                'exists:accounts,id',
-                'different:account_id',
+                'exists:accounts,number',
+                'different:account_number',
             ],
         ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'description' => 'Descrição',
+            'type' => 'Tipo de Transação',
+            'amount' => 'Valor',
+            'account_number' => 'Conta de Origem',
+            'payee_number' => 'Conta de Destino',
+        ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'account_number' => (string) $this->input('account_number'),
+            'payee_number' => (string) $this->input('payee_number'),
+        ]);
     }
 }

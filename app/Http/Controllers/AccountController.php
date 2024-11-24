@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Transaction;
+use App\Models\TransactionType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
@@ -106,5 +108,19 @@ class AccountController extends Controller
         $account->restore();
 
         return response()->json($account);
+    }
+
+    /**
+     * Mostra página de criação de Transações.
+     */
+    public function createTransaction(Account $account)
+    {
+        Gate::authorize('create', Transaction::class);
+        $types = TransactionType::all();
+
+        return Inertia::render('Transaction/Create', [
+            'account' => $account,
+            'types' => $types,
+        ]);
     }
 }

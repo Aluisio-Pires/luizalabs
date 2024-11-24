@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Gate;
+use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
@@ -17,11 +19,13 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostra página de criação de Transações.
      */
     public function create()
     {
-        //
+        Gate::authorize('create', Transaction::class);
+
+        return Inertia::render('Account/Create');
     }
 
     /**
@@ -29,7 +33,7 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        //
+        dd($request->validated());
     }
 
     /**

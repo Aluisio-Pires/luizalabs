@@ -33,7 +33,7 @@ class TransactionFactory extends Factory
             'total' => $total,
             'transaction_type_id' => TransactionType::factory(),
             'account_id' => Account::factory(),
-            'destination_account_id' => Account::factory(),
+            'payee_id' => Account::factory(),
         ];
     }
 }

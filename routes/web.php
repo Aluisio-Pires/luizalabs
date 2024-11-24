@@ -29,4 +29,5 @@ Route::middleware([
     Route::resource('transactions', TransactionController::class);
     Route::resource('ledgers', LedgerController::class);
     Route::resource('subledgers', SubledgerController::class);
+    Route::get('accounts/{account}/transactions/create', [AccountController::class, 'createTransaction'])->name('accounts.createTransaction');
 });
