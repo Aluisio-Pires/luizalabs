@@ -25,7 +25,14 @@ class StoreAccountRequest extends FormRequest
         return [
             'balance' => ['sometimes', 'decimal:2', 'min:0'],
             'credit_limit' => ['sometimes', 'decimal:2', 'min:0'],
-            'user_id' => ['required', 'exists:users,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'balance' => 'Saldo',
+            'credit_limit' => 'Limite de Crédito',
         ];
     }
 }

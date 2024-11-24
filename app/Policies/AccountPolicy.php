@@ -12,7 +12,7 @@ class AccountPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class AccountPolicy
      */
     public function view(User $user, Account $account): bool
     {
-        return false;
+        return $account->user_id === $user->id;
     }
 
     /**
@@ -28,7 +28,7 @@ class AccountPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,7 +36,7 @@ class AccountPolicy
      */
     public function update(User $user, Account $account): bool
     {
-        return false;
+        return $account->user_id === $user->id;
     }
 
     /**
@@ -44,7 +44,7 @@ class AccountPolicy
      */
     public function delete(User $user, Account $account): bool
     {
-        return false;
+        return $account->user_id === $user->id;
     }
 
     /**
@@ -52,7 +52,7 @@ class AccountPolicy
      */
     public function restore(User $user, Account $account): bool
     {
-        return false;
+        return $account->user_id === $user->id;
     }
 
     /**
@@ -60,6 +60,6 @@ class AccountPolicy
      */
     public function forceDelete(User $user, Account $account): bool
     {
-        return false;
+        return $account->user_id === $user->id;
     }
 }
