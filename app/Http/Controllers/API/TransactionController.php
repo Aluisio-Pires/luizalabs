@@ -44,12 +44,6 @@ class TransactionController extends APIController
         $service = new TransactionService;
         $transaction = $service->create($request->validated());
 
-        if (! $transaction) {
-            return response()->json([
-                'error' => 'Ocorreu um erro ao processar a transação.',
-            ]);
-        }
-
         return response()->json([
             'message' => 'Transação realizada com sucesso',
             'transaction' => $transaction,
