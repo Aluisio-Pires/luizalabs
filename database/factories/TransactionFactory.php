@@ -31,7 +31,7 @@ class TransactionFactory extends Factory
             'amount' => $amount,
             'fee' => $fee,
             'total' => $total,
-            'transaction_type_id' => TransactionType::factory(),
+            'transaction_type_id' => TransactionType::where('slug', $this->faker->randomElement(['deposito', 'saque', 'transferencia']))->first()->getKey(),
             'account_id' => Account::factory(),
             'payee_id' => Account::factory(),
         ];

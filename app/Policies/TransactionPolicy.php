@@ -12,7 +12,7 @@ class TransactionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class TransactionPolicy
      */
     public function view(User $user, Transaction $transaction): bool
     {
-        return false;
+        return ($transaction->account->user_id === $user->id) || ($transaction->payee->user_id === $user->id);
     }
 
     /**
@@ -36,7 +36,7 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction): bool
     {
-        return false;
+        return ($transaction->account->user_id === $user->id) || ($transaction->payee->user_id === $user->id);
     }
 
     /**

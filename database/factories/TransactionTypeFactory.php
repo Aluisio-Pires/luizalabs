@@ -19,6 +19,7 @@ class TransactionTypeFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->randomElement(['Deposito', 'Saque', 'Transferencia']),
+            'slug' => $this->faker->unique()->randomElement(['deposito', 'saque', 'transferencia']),
             'description' => $this->faker->sentence(),
         ];
     }
