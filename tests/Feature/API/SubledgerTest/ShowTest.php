@@ -14,7 +14,7 @@ test('can show a subledger', function (): void {
     $subledger = Subledger::whereHas('account', fn ($query) => $query->where('user_id', $user->id))->get()->first();
 
     $this->authRequest('get',
-        route('api.subledgers.show', ['subledger' => $subledger->id]),
+        route('api.v1.subledgers.show', ['subledger' => $subledger->id]),
         Response::HTTP_OK,
         [],
         $user

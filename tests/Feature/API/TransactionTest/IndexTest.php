@@ -12,7 +12,7 @@ test('can index transactions', function (): void {
         )
     )->create();
     $response = $this->authRequest('get',
-        route('api.transactions.index'),
+        route('api.v1.transactions.index'),
         Response::HTTP_OK,
         [],
         $user

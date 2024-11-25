@@ -12,7 +12,7 @@ test('can user register', function (): void {
 
     $this->simpleRequest(
         'post',
-        route('api.auth.register'),
+        route('api.v1.auth.register'),
         Response::HTTP_CREATED,
         $request
     );

@@ -12,7 +12,7 @@ test('can user login', function (): void {
 
     $this->simpleRequest(
         'post',
-        route('api.auth.login'),
+        route('api.v1.auth.login'),
         Response::HTTP_OK,
         $request
     );
@@ -27,7 +27,7 @@ test('can user fail login with wrong credentials', function (): void {
 
     $this->simpleRequest(
         'post',
-        route('api.auth.login'),
+        route('api.v1.auth.login'),
         Response::HTTP_UNPROCESSABLE_ENTITY,
         $request
     );

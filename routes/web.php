@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\SubledgerController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
@@ -27,7 +26,6 @@ Route::middleware([
     })->name('dashboard');
     Route::resource('accounts', AccountController::class);
     Route::resource('transactions', TransactionController::class);
-    Route::resource('ledgers', LedgerController::class);
     Route::resource('subledgers', SubledgerController::class);
     Route::get('accounts/{account}/transactions/create', [AccountController::class, 'createTransaction'])->name('accounts.createTransaction');
 });

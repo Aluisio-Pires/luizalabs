@@ -13,7 +13,7 @@ test('can create fees', function (): void {
     ];
 
     $this->authRequest('post',
-        route('api.fees.store'),
+        route('api.v1.fees.store'),
         Response::HTTP_CREATED,
         $request
     );

@@ -9,7 +9,7 @@ test('can index account', function (): void {
         Account::factory()->count(3)
     )->create();
     $response = $this->authRequest('get',
-        route('api.accounts.index'),
+        route('api.v1.accounts.index'),
         Response::HTTP_OK,
         [],
         $user

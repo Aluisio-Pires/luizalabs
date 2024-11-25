@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthController extends Controller
 {
     /**
-     * Register a new user.
+     * Cria um novo Usuário.
      */
     public function register(Request $request)
     {
@@ -23,7 +23,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Login a user.
+     * Autentica um Usuário.
      */
     public function login(Request $request)
     {
@@ -47,7 +47,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout a user.
+     * Desautentica um Usuário.
      */
     public function logout(Request $request)
     {
@@ -61,7 +61,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get Authenticated User.
+     * Exibe os dados do Usuário autenticado.
      */
     public function user(Request $request)
     {

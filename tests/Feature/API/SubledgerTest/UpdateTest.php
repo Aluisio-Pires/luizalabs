@@ -19,7 +19,7 @@ test('can update a subledger', function (): void {
     ];
 
     $this->authRequest('put',
-        route('api.subledgers.update', ['subledger' => $subledger->id]),
+        route('api.v1.subledgers.update', ['subledger' => $subledger->id]),
         Response::HTTP_OK,
         $request,
         $user

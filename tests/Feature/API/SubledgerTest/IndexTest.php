@@ -14,7 +14,7 @@ test('can index subledgers', function (): void {
 
     Subledger::factory()->count(3)->create();
     $response = $this->authRequest('get',
-        route('api.subledgers.index'),
+        route('api.v1.subledgers.index'),
         Response::HTTP_OK,
         [],
         $user

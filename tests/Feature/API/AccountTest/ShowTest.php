@@ -12,7 +12,7 @@ test('can show an account', function (): void {
     $account = Account::where('user_id', $user->id)->first();
 
     $this->authRequest('get',
-        route('api.accounts.show', ['account' => $account->id]),
+        route('api.v1.accounts.show', ['account' => $account->id]),
         Response::HTTP_OK,
         [],
         $user

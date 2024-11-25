@@ -15,7 +15,7 @@ test('can show a transaction', function (): void {
     $transaction = Transaction::whereHas('account', fn ($query) => $query->where('user_id', $user->id))->first();
 
     $this->authRequest('get',
-        route('api.transactions.show', ['transaction' => $transaction->id]),
+        route('api.v1.transactions.show', ['transaction' => $transaction->id]),
         Response::HTTP_OK,
         [],
         $user

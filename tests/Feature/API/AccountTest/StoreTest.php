@@ -12,7 +12,7 @@ test('can create accounts', function (): void {
     ];
 
     $response = $this->authRequest('post',
-        route('api.accounts.store'),
+        route('api.v1.accounts.store'),
         Response::HTTP_CREATED,
         $request,
         $user

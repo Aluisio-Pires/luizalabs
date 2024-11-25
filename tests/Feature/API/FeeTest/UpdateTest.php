@@ -12,7 +12,7 @@ test('can update a fee', function (): void {
     ];
 
     $this->authRequest('put',
-        route('api.fees.update', ['fee' => $fee->id]),
+        route('api.v1.fees.update', ['fee' => $fee->id]),
         Response::HTTP_OK,
         $request
     );

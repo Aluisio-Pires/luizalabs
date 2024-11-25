@@ -17,7 +17,7 @@ test('can update a transaction', function (): void {
         'description' => 'Test Message',
     ];
     $this->authRequest('put',
-        route('api.transactions.update', ['transaction' => $transaction->id]),
+        route('api.v1.transactions.update', ['transaction' => $transaction->id]),
         Response::HTTP_OK,
         $request,
         $user

@@ -37,7 +37,7 @@ test('can create transactions', function (): void {
     ];
 
     $response = $this->authRequest('post',
-        route('api.transactions.store'),
+        route('api.v1.transactions.store'),
         Response::HTTP_CREATED,
         $request,
         $user

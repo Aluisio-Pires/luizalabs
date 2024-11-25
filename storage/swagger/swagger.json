@@ -1,0 +1,1687 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel",
+        "description": "Documentation for the Application API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:9000/api",
+            "description": "Laravel Server #1"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "summary": "Autentica um Usu\u00e1rio.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "tags": [
+                    "login"
+                ]
+            }
+        },
+        "/register": {
+            "post": {
+                "summary": "Cria um novo Usu\u00e1rio.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "tags": [
+                    "register"
+                ]
+            }
+        },
+        "/user": {
+            "post": {
+                "summary": "Exibe os dados do Usu\u00e1rio autenticado.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "user"
+                ]
+            }
+        },
+        "/logout": {
+            "post": {
+                "summary": "Desautentica um Usu\u00e1rio.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "logout"
+                ]
+            }
+        },
+        "/transactions": {
+            "get": {
+                "summary": "Recupera uma lista paginada de transa\u00e7\u00f5es do usu\u00e1rio.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "transactions"
+                ]
+            },
+            "post": {
+                "summary": "Cria uma nova transa\u00e7\u00e3o.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "type",
+                                    "amount",
+                                    "account_number"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "amount": {
+                                        "type": "string",
+                                        "minLength": 0
+                                    },
+                                    "account_number": {
+                                        "type": "integer"
+                                    },
+                                    "payee_number": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/transactions/{transaction}": {
+            "get": {
+                "summary": "Recupera os dados de uma transa\u00e7\u00e3o espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "transactions"
+                ]
+            },
+            "put": {
+                "summary": "Atualiza os dados de uma transa\u00e7\u00e3o especifica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "transactions"
+                ]
+            },
+            "patch": {
+                "summary": "Atualiza os dados de uma transa\u00e7\u00e3o especifica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "description"
+                                ],
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/accounts": {
+            "get": {
+                "summary": "Recupera uma lista paginada de contas do usu\u00e1rio.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "accounts"
+                ]
+            },
+            "post": {
+                "summary": "Cria uma nova conta.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "balance": {
+                                        "type": "string",
+                                        "minLength": 0
+                                    },
+                                    "credit_limit": {
+                                        "type": "string",
+                                        "minLength": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "accounts"
+                ]
+            }
+        },
+        "/accounts/{account}": {
+            "get": {
+                "summary": "Recupera os dados de uma conta espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "accounts"
+                ]
+            }
+        },
+        "/fees": {
+            "get": {
+                "summary": "Recupera uma lista paginada de Taxas.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "fees"
+                ]
+            },
+            "post": {
+                "summary": "Cria uma nova Taxa.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "type",
+                                    "value",
+                                    "transaction_type_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 1000
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "fixed",
+                                            "percentage"
+                                        ]
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "minLength": 0
+                                    },
+                                    "transaction_type_id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "fees"
+                ]
+            }
+        },
+        "/fees/{fee}": {
+            "get": {
+                "summary": "Recupera os dados de uma Taxa espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "fee",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "fees"
+                ]
+            },
+            "put": {
+                "summary": "Atualiza os dados de uma Taxa espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "fee",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "fees"
+                ]
+            },
+            "patch": {
+                "summary": "Atualiza os dados de uma Taxa espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "fee",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "fees"
+                ]
+            },
+            "delete": {
+                "summary": "Remove uma Taxa espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "fee",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "fees"
+                ]
+            }
+        },
+        "/subledgers": {
+            "get": {
+                "summary": "Recupera uma lista paginada de Subledgers.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "subledgers"
+                ]
+            }
+        },
+        "/subledgers/{subledger}": {
+            "get": {
+                "summary": "Recupera os dados de uma Subledger espec\u00edfico.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "subledger",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "subledgers"
+                ]
+            },
+            "put": {
+                "summary": "Atualiza os dados de uma Subledger espec\u00edfico.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "subledger",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "subledgers"
+                ]
+            },
+            "patch": {
+                "summary": "Atualiza os dados de uma Subledger espec\u00edfico.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "subledger",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 1000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "subledgers"
+                ]
+            }
+        }
+    },
+    "tags": [],
+    "components": {
+        "schemas": {
+            "Account": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('accounts_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 6635775991841900682
+                    },
+                    "number": {
+                        "name": "number",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('accounts_number_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 5045740947190040898
+                    },
+                    "balance": {
+                        "name": "balance",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 1006195466496519982
+                    },
+                    "credit_limit": {
+                        "name": "credit_limit",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 1459883201268868152
+                    },
+                    "user_id": {
+                        "name": "user_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 6211381214377171770
+                    },
+                    "deleted_at": {
+                        "name": "deleted_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "user": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Transaction"
+                        }
+                    },
+                    "inflows": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Transaction"
+                        }
+                    },
+                    "subledgers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Subledger"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "number",
+                    "balance",
+                    "credit_limit",
+                    "user_id"
+                ]
+            },
+            "Fee": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('fees_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 7313673245119846863
+                    },
+                    "name": {
+                        "name": "name",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "description": {
+                        "name": "description",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "type": {
+                        "name": "type",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "value": {
+                        "name": "value",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 6469912424283177565
+                    },
+                    "transaction_type_id": {
+                        "name": "transaction_type_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 8870811654462345257
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "transactionType": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/TransactionType"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "type",
+                    "value",
+                    "transaction_type_id"
+                ]
+            },
+            "Ledger": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('ledgers_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 2737922190023761344
+                    },
+                    "name": {
+                        "name": "name",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "description": {
+                        "name": "description",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "subledgers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Subledger"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ]
+            },
+            "Subledger": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('subledgers_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 3117627438890046979
+                    },
+                    "name": {
+                        "name": "name",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "description": {
+                        "name": "description",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "value": {
+                        "name": "value",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 3164639149996282460
+                    },
+                    "ledger_id": {
+                        "name": "ledger_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 6993190808167092702
+                    },
+                    "transaction_id": {
+                        "name": "transaction_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 4436653823933377478
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "ledger": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Ledger"
+                    },
+                    "transaction": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Transaction"
+                    },
+                    "account": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Account"
+                    }
+                },
+                "required": [
+                    "id",
+                    "value",
+                    "ledger_id",
+                    "transaction_id"
+                ]
+            },
+            "Transaction": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('transactions_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 5894284237504812477
+                    },
+                    "description": {
+                        "name": "description",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "type": {
+                        "name": "type",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "status": {
+                        "name": "status",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "message": {
+                        "name": "message",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "amount": {
+                        "name": "amount",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 5799843840311092986
+                    },
+                    "fee": {
+                        "name": "fee",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 4612401321466768003
+                    },
+                    "total": {
+                        "name": "total",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 7793517757815103333
+                    },
+                    "transaction_type_id": {
+                        "name": "transaction_type_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 5472345773871077853
+                    },
+                    "account_id": {
+                        "name": "account_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 4296972811486451640
+                    },
+                    "payee_id": {
+                        "name": "payee_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 6163296193867517935
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "transactionType": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/TransactionType"
+                    },
+                    "account": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Account"
+                    },
+                    "payee": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Account"
+                    },
+                    "subledgers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Subledger"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "type",
+                    "status",
+                    "amount",
+                    "fee",
+                    "total",
+                    "transaction_type_id"
+                ]
+            },
+            "TransactionType": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('transaction_types_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 6987597526898369317
+                    },
+                    "name": {
+                        "name": "name",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "slug": {
+                        "name": "slug",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "description": {
+                        "name": "description",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Transaction"
+                        }
+                    },
+                    "fees": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Fee"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "slug"
+                ]
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('users_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 3716425957295651059
+                    },
+                    "name": {
+                        "name": "name",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "email": {
+                        "name": "email",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "email_verified_at": {
+                        "name": "email_verified_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "password": {
+                        "name": "password",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "remember_token": {
+                        "name": "remember_token",
+                        "type_name": "varchar",
+                        "type": "character varying(100)",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "current_team_id": {
+                        "name": "current_team_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 3114595403118039563
+                    },
+                    "profile_photo_path": {
+                        "name": "profile_photo_path",
+                        "type_name": "varchar",
+                        "type": "character varying(2048)",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "deleted_at": {
+                        "name": "deleted_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "two_factor_secret": {
+                        "name": "two_factor_secret",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "two_factor_recovery_codes": {
+                        "name": "two_factor_recovery_codes",
+                        "type_name": "text",
+                        "type": "text",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": "a long text"
+                    },
+                    "accounts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Account"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "email",
+                    "password"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

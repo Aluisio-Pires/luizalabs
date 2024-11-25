@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 test('can index fees', function (): void {
     Fee::factory()->count(3)->create();
     $response = $this->authRequest('get',
-        route('api.fees.index'),
+        route('api.v1.fees.index'),
         Response::HTTP_OK,
     );
 
