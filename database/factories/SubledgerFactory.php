@@ -25,7 +25,7 @@ class SubledgerFactory extends Factory
             'description' => $this->faker->sentence(),
             'value' => $this->faker->numberBetween(10000, 100000000),
             'fee' => $this->faker->numberBetween(10000, 100000000),
-            'ledger_id' => Ledger::factory(),
+            'ledger_id' => Ledger::where('name', $this->faker->randomElement(['Entrada', 'Saída']))->first()->getKey(),
             'transaction_id' => Transaction::factory(),
             'account_id' => Account::factory(),
         ];

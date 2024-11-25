@@ -12,7 +12,7 @@ class SubledgerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class SubledgerPolicy
      */
     public function view(User $user, Subledger $subledger): bool
     {
-        return false;
+        return $subledger->account->user_id === $user->id;
     }
 
     /**
@@ -36,7 +36,7 @@ class SubledgerPolicy
      */
     public function update(User $user, Subledger $subledger): bool
     {
-        return false;
+        return $subledger->account->user_id === $user->id;
     }
 
     /**

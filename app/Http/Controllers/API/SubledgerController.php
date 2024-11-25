@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\UpdateSubledgerRequest;
 use App\Models\Subledger;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response;
 
 class SubledgerController extends APIController
 {
@@ -43,17 +42,5 @@ class SubledgerController extends APIController
         $subledger->update($request->validated());
 
         return $this->response(['subledger' => $subledger]);
-    }
-
-    /**
-     * Remove uma Subledger específico.
-     */
-    public function destroy(Subledger $subledger)
-    {
-        Gate::authorize('delete', $subledger);
-
-        $subledger->delete();
-
-        return $this->response(['message' => 'Subledger removido com sucesso'], Response::HTTP_NO_CONTENT);
     }
 }
