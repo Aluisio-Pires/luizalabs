@@ -12,6 +12,10 @@ class FeeController extends APIController
 {
     /**
      * Recupera uma lista paginada de Taxas.
+     *
+     * @Request({
+     *        tags: Taxa
+     *   })
      */
     public function index()
     {
@@ -25,6 +29,10 @@ class FeeController extends APIController
 
     /**
      * Cria uma nova Taxa.
+     *
+     * @Request({
+     *         tags: Taxa
+     *    })
      */
     public function store(StoreFeeRequest $request)
     {
@@ -39,6 +47,10 @@ class FeeController extends APIController
 
     /**
      * Recupera os dados de uma Taxa específica.
+     *
+     * @Request({
+     *         tags: Taxa
+     *    })
      */
     public function show(Fee $fee)
     {
@@ -49,6 +61,10 @@ class FeeController extends APIController
 
     /**
      * Atualiza os dados de uma Taxa específica.
+     *
+     * @Request({
+     *         tags: Taxa
+     *    })
      */
     public function update(UpdateFeeRequest $request, Fee $fee)
     {
@@ -61,6 +77,10 @@ class FeeController extends APIController
 
     /**
      * Remove uma Taxa específica.
+     *
+     * @Request({
+     *         tags: Taxa
+     *    })
      */
     public function destroy(Fee $fee)
     {

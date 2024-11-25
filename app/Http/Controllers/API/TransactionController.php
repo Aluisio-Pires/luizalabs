@@ -13,6 +13,10 @@ class TransactionController extends APIController
 {
     /**
      * Recupera uma lista paginada de transações do usuário.
+     *
+     * @Request({
+     *          tags: Transação
+     *     })
      */
     public function index()
     {
@@ -29,6 +33,10 @@ class TransactionController extends APIController
 
     /**
      * Cria uma nova transação.
+     *
+     * @Request({
+     *           tags: Transação
+     *      })
      */
     public function store(StoreTransactionRequest $request)
     {
@@ -50,6 +58,10 @@ class TransactionController extends APIController
 
     /**
      * Recupera os dados de uma transação específica.
+     *
+     * @Request({
+     *           tags: Transação
+     *      })
      */
     public function show(Transaction $transaction)
     {
@@ -60,6 +72,10 @@ class TransactionController extends APIController
 
     /**
      * Atualiza os dados de uma transação especifica.
+     *
+     * @Request({
+     *           tags: Transação
+     *      })
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {

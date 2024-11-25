@@ -11,6 +11,10 @@ class AccountController extends APIController
 {
     /**
      * Recupera uma lista paginada de contas do usuário.
+     *
+     * @Request({
+     *       tags: Conta
+     *  })
      */
     public function index()
     {
@@ -25,6 +29,10 @@ class AccountController extends APIController
 
     /**
      * Cria uma nova conta.
+     *
+     * @Request({
+     *        tags: Conta
+     *   })
      */
     public function store(StoreAccountRequest $request)
     {
@@ -43,6 +51,10 @@ class AccountController extends APIController
 
     /**
      * Recupera os dados de uma conta específica.
+     *
+     * @Request({
+     *        tags: Conta
+     *   })
      */
     public function show(Account $account)
     {

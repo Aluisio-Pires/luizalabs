@@ -10,6 +10,10 @@ class SubledgerController extends APIController
 {
     /**
      * Recupera uma lista paginada de Subledgers.
+     *
+     * @Request({
+     *         tags: Subledger
+     *    })
      */
     public function index()
     {
@@ -24,6 +28,10 @@ class SubledgerController extends APIController
 
     /**
      * Recupera os dados de uma Subledger específico.
+     *
+     * @Request({
+     *          tags: Subledger
+     *     })
      */
     public function show(Subledger $subledger)
     {
@@ -34,6 +42,10 @@ class SubledgerController extends APIController
 
     /**
      * Atualiza os dados de uma Subledger específico.
+     *
+     * @Request({
+     *          tags: Subledger
+     *     })
      */
     public function update(UpdateSubledgerRequest $request, Subledger $subledger)
     {

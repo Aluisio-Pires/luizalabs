@@ -14,6 +14,10 @@ class AuthController extends Controller
 {
     /**
      * Cria um novo Usuário.
+     *
+     * @Request({
+     *      tags: Autenticação
+     * })
      */
     public function register(Request $request)
     {
@@ -24,6 +28,10 @@ class AuthController extends Controller
 
     /**
      * Autentica um Usuário.
+     *
+     * @Request({
+     *       tags: Autenticação
+     *  })
      */
     public function login(Request $request)
     {
@@ -48,6 +56,10 @@ class AuthController extends Controller
 
     /**
      * Desautentica um Usuário.
+     *
+     * @Request({
+     *       tags: Autenticação
+     *  })
      */
     public function logout(Request $request)
     {
@@ -62,6 +74,10 @@ class AuthController extends Controller
 
     /**
      * Exibe os dados do Usuário autenticado.
+     *
+     * @Request({
+     *       tags: Autenticação
+     *  })
      */
     public function user(Request $request)
     {
