@@ -23,7 +23,7 @@ class FeeFactory extends Factory
             'description' => $this->faker->sentence(),
             'type' => $this->faker->randomElement(['fixed', 'percentage']),
             'value' => $this->faker->numberBetween(1000000, 100000000),
-            'transaction_type_id' => TransactionType::factory(),
+            'transaction_type_id' => TransactionType::where('slug', $this->faker->randomElement(['deposito', 'saque', 'transferencia']))->first()->getKey(),
         ];
     }
 }

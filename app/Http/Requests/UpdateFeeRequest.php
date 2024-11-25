@@ -25,9 +25,6 @@ class UpdateFeeRequest extends FormRequest
         return [
             'name' => ['sometimes', 'string', 'max:255'],
             'description' => ['sometimes', 'nullable', 'string', 'max:1000'],
-            'type' => ['sometimes', 'string', 'in:fixed,percentage'],
-            'value' => ['sometimes', 'decimal:2', 'min:0'],
-            'transaction_type_id' => ['sometimes', 'exists:transaction_types,id'],
         ];
     }
 }
