@@ -12,10 +12,13 @@ class Subledger extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'description',
         'value',
+        'fee',
         'ledger_id',
         'transaction_id',
+        'account_id',
     ];
 
     protected $casts = [
@@ -30,5 +33,10 @@ class Subledger extends Model
     public function transaction(): BelongsTo
     {
         return $this->belongsTo(Transaction::class);
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
     }
 }

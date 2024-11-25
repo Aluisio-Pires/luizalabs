@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Account;
 use App\Models\Ledger;
 use App\Models\Subledger;
 use App\Models\Transaction;
@@ -23,8 +24,10 @@ class SubledgerFactory extends Factory
             'name' => $this->faker->unique()->word(),
             'description' => $this->faker->sentence(),
             'value' => $this->faker->numberBetween(10000, 100000000),
+            'fee' => $this->faker->numberBetween(10000, 100000000),
             'ledger_id' => Ledger::factory(),
             'transaction_id' => Transaction::factory(),
+            'account_id' => Account::factory(),
         ];
     }
 }

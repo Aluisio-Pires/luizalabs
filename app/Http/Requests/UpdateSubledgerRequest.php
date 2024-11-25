@@ -24,9 +24,6 @@ class UpdateSubledgerRequest extends FormRequest
     {
         return [
             'description' => ['sometimes', 'nullable', 'string', 'max:1000'],
-            'value' => ['sometimes', 'decimal:2', 'min:0'],
-            'ledger_id' => ['sometimes', 'exists:ledgers,id'],
-            'transaction_id' => ['sometimes', 'exists:transactions,id'],
         ];
     }
 }
