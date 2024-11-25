@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TransactionController extends APIController
 {
     /**
-     * Recupera uma lista paginada de transações.
+     * Recupera uma lista paginada de transações do usuário.
      */
     public function index()
     {
@@ -20,6 +20,7 @@ class TransactionController extends APIController
 
         $transactions = Transaction::query()
             ->whereHas('account', fn ($query) => $query->where('user_id', auth()->user()->id))
+            ->orWhereHas('payee', fn ($query) => $query->where('user_id', auth()->user()->id))
             ->orderBy('id', 'desc')
             ->paginate(20);
 

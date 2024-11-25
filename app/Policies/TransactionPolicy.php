@@ -36,7 +36,7 @@ class TransactionPolicy
      */
     public function update(User $user, Transaction $transaction): bool
     {
-        return ($transaction->account->user_id === $user->id) || ($transaction->payee->user_id === $user->id);
+        return $transaction->account->user_id === $user->id;
     }
 
     /**
