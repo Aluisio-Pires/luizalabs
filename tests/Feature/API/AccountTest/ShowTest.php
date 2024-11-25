@@ -5,17 +5,15 @@ use App\Models\Transaction;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
-test('can show a transaction', function (): void {
+test('can show an account', function (): void {
     $user = User::factory()->has(
-        Account::factory()->has(
-            Transaction::factory()
-        )
+        Account::factory()
     )->create();
 
-    $transaction = Transaction::whereHas('account', fn ($query) => $query->where('user_id', $user->id))->first();
+    $account = Account::where('user_id', $user->id)->first();
 
     $this->authRequest('get',
-        route('api.transactions.show', ['transaction' => $transaction->id]),
+        route('api.accounts.show', ['account' => $account->id]),
         Response::HTTP_OK,
         [],
         $user

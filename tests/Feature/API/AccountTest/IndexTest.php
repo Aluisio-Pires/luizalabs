@@ -1,22 +1,19 @@
 <?php
 
 use App\Models\Account;
-use App\Models\Transaction;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
-test('can index transactions', function (): void {
+test('can index account', function (): void {
     $user = User::factory()->has(
-        Account::factory()->has(
-            Transaction::factory()->count(4)
-        )
+        Account::factory()->count(3)
     )->create();
     $response = $this->authRequest('get',
-        route('api.transactions.index'),
+        route('api.accounts.index'),
         Response::HTTP_OK,
         [],
         $user
     );
 
-    $response->assertJsonCount(4, 'data');
+    $response->assertJsonCount(3, 'data');
 });
