@@ -2,26 +2,17 @@
 
 namespace App\Http\Services;
 
+use App\Jobs\ProcessTransactionJob;
 use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\TransactionType;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
 
 class TransactionService
 {
     public function create(array $request): ?Transaction
     {
-        try {
-            return DB::transaction(function () use ($request): Transaction {
-                return $this->createTransaction($request);
-            });
-        } catch (Exception $e) {
-            Log::error($e);
-
-            return null;
-        }
+        return $this->createTransaction($request);
     }
 
     private function createTransaction(array $request): Transaction
@@ -30,7 +21,7 @@ class TransactionService
         $fee = $this->calculateFee($request['amount'], $transactionType);
         $total = $fee + $request['amount'];
 
-        return Transaction::create([
+        $transaction = Transaction::create([
             'description' => $request['description'],
             'type' => $request['type'],
             'status' => 'pendente',
@@ -42,6 +33,10 @@ class TransactionService
             'account_id' => $this->findAccount($request['account_number'])->getKey(),
             'payee_id' => $request['payee_number'] ? $this->findAccount($request['payee_number'])->getKey() : null,
         ]);
+
+        ProcessTransactionJob::dispatch($transaction)->onQueue('transactions');
+
+        return $transaction;
     }
 
     private function findTransactionType(string $type): TransactionType
@@ -68,5 +63,87 @@ class TransactionService
         }
 
         return $total;
+    }
+
+    public function process(Transaction $transaction): array
+    {
+        $account = $transaction->account;
+
+        if ($transaction->type !== 'deposito' && ! $this->hasSufficientFunds($account, $transaction->total)) {
+            return $this->failTransaction($transaction);
+        }
+
+        return $this->handleTransaction($transaction, $account);
+    }
+
+    private function handleTransaction(Transaction $transaction, Account $account): array
+    {
+        return match ($transaction->type) {
+            'deposito' => $this->deposit($account, $transaction),
+            'saque' => $this->withdraw($account, $transaction),
+            'transferencia' => $this->transfer($account, $transaction),
+            default => throw new InvalidArgumentException('Tipo de transação inválido'),
+        };
+    }
+
+    private function hasSufficientFunds(Account $account, float $value): bool
+    {
+        return $value <= $account->balance + $account->credit_limit;
+    }
+
+    private function deposit(Account $account, Transaction $transaction): array
+    {
+        $account->update([
+            'balance' => $account->balance + $transaction->amount,
+        ]);
+
+        return $this->completeTransaction($transaction);
+    }
+
+    private function withdraw(Account $account, Transaction $transaction): array
+    {
+        $account->update([
+            'balance' => $account->balance - $transaction->total,
+        ]);
+
+        return $this->completeTransaction($transaction);
+    }
+
+    private function transfer(Account $account, Transaction $transaction): array
+    {
+        $this->withdraw($account, $transaction);
+
+        $payee = $transaction->payee;
+        $payee->update([
+            'balance' => $payee->balance + $transaction->amount,
+        ]);
+
+        return $this->completeTransaction($transaction);
+    }
+
+    private function failTransaction(Transaction $transaction): array
+    {
+        $transaction->update([
+            'status' => 'falha',
+            'message' => 'Saldo insuficiente para realizar essa transação.',
+        ]);
+
+        return [
+            'success' => false,
+            'message' => 'Saldo insuficiente para realizar essa transação.',
+        ];
+    }
+
+    private function completeTransaction(Transaction $transaction): array
+    {
+        $transaction->update([
+            'status' => 'sucesso',
+            'message' => 'Transação realizada com sucesso',
+        ]);
+
+        return [
+            'success' => true,
+            'message' => 'Transação realizada com sucesso',
+        ];
     }
 }
