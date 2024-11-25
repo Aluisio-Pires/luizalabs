@@ -20,7 +20,7 @@ class AccountController extends APIController
             ->where('user_id', auth()->user()->id)
             ->paginate(20);
 
-        return $this->response($accounts->items());
+        return response()->json($accounts);
     }
 
     /**

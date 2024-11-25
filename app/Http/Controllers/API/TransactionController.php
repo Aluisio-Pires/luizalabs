@@ -24,7 +24,7 @@ class TransactionController extends APIController
             ->orderBy('id', 'desc')
             ->paginate(20);
 
-        return $this->response($transactions->items());
+        return response()->json($transactions);
     }
 
     /**

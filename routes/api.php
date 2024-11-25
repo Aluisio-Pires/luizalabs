@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\FeeController;
 use App\Http\Controllers\API\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
@@ -17,4 +18,7 @@ Route::middleware([EnsureFrontendRequestsAreStateful::class, 'auth:sanctum'])->n
 
     Route::apiResource('/transactions', TransactionController::class)->only(['index', 'store', 'show', 'update']);
     Route::apiResource('/accounts', AccountController::class)->only(['index', 'store', 'show']);
+    Route::apiResource('/fees', FeeController::class);
+    Route::apiResource('/fees', FeeController::class)->except('store');
+
 });
