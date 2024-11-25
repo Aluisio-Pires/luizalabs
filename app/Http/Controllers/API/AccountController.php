@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\StoreAccountRequest;
 use App\Models\Account;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +17,7 @@ class AccountController extends APIController
      *       tags: Conta
      *  })
      */
-    public function index()
+    public function index(): JsonResponse
     {
         Gate::authorize('viewAny', Account::class);
 
@@ -34,7 +35,7 @@ class AccountController extends APIController
      *        tags: Conta
      *   })
      */
-    public function store(StoreAccountRequest $request)
+    public function store(StoreAccountRequest $request): JsonResponse
     {
         Gate::authorize('create', Account::class);
         $account = Account::create([
@@ -56,7 +57,7 @@ class AccountController extends APIController
      *        tags: Conta
      *   })
      */
-    public function show(Account $account)
+    public function show(Account $account): JsonResponse
     {
         Gate::authorize('view', $account);
 

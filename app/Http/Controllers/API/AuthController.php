@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Actions\Fortify\CreateNewUser;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthController extends Controller
+class AuthController extends APIController
 {
     /**
      * Cria um novo Usuário.
@@ -19,11 +19,11 @@ class AuthController extends Controller
      *      tags: Autenticação
      * })
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         $user = (new CreateNewUser)->create($request->all());
 
-        return response()->json($user, Response::HTTP_CREATED);
+        return $this->response(['user' => $user], Response::HTTP_CREATED);
     }
 
     /**
@@ -33,7 +33,7 @@ class AuthController extends Controller
      *       tags: Autenticação
      *  })
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $data = $request->validate([
             'email' => 'required|email',
@@ -43,12 +43,12 @@ class AuthController extends Controller
         $user = User::where('email', $data['email'])->first();
 
         if (! $user || ! Hash::check($data['password'], $user->password)) {
-            return response()->json(['message' => 'Invalid credentials.'], Response::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->error([], 'Invalid credentials.');
         }
 
         $token = $user->createToken('apiToken')->plainTextToken;
 
-        return response()->json([
+        return $this->response([
             'user' => $user,
             'token' => $token,
         ]);
@@ -61,7 +61,7 @@ class AuthController extends Controller
      *       tags: Autenticação
      *  })
      */
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $token = $request->user()->currentAccessToken();
 
@@ -79,8 +79,8 @@ class AuthController extends Controller
      *       tags: Autenticação
      *  })
      */
-    public function user(Request $request)
+    public function user(Request $request): JsonResponse
     {
-        return $request->user();
+        return $this->response(['user' => $request->user()]);
     }
 }

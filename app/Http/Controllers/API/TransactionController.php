@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Services\TransactionService;
 use App\Models\Transaction;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +19,7 @@ class TransactionController extends APIController
      *          tags: Transação
      *     })
      */
-    public function index()
+    public function index(): JsonResponse
     {
         Gate::authorize('viewAny', Transaction::class);
 
@@ -38,7 +39,7 @@ class TransactionController extends APIController
      *           tags: Transação
      *      })
      */
-    public function store(StoreTransactionRequest $request)
+    public function store(StoreTransactionRequest $request): JsonResponse
     {
         Gate::authorize('create', Transaction::class);
         $service = new TransactionService;
@@ -57,7 +58,7 @@ class TransactionController extends APIController
      *           tags: Transação
      *      })
      */
-    public function show(Transaction $transaction)
+    public function show(Transaction $transaction): JsonResponse
     {
         Gate::authorize('view', $transaction);
 
@@ -71,7 +72,7 @@ class TransactionController extends APIController
      *           tags: Transação
      *      })
      */
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
+    public function update(UpdateTransactionRequest $request, Transaction $transaction): JsonResponse
     {
         Gate::authorize('update', $transaction);
 

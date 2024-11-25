@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\StoreFeeRequest;
 use App\Http\Requests\UpdateFeeRequest;
 use App\Models\Fee;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,7 +18,7 @@ class FeeController extends APIController
      *        tags: Taxa
      *   })
      */
-    public function index()
+    public function index(): JsonResponse
     {
         Gate::authorize('viewAny', Fee::class);
 
@@ -34,13 +35,12 @@ class FeeController extends APIController
      *         tags: Taxa
      *    })
      */
-    public function store(StoreFeeRequest $request)
+    public function store(StoreFeeRequest $request): JsonResponse
     {
         Gate::authorize('create', Fee::class);
         $fee = Fee::create($request->validated());
 
-        return response()->json([
-            'message' => 'Conta criada com sucesso',
+        return $this->response([
             'account' => $fee,
         ], Response::HTTP_CREATED);
     }
@@ -52,7 +52,7 @@ class FeeController extends APIController
      *         tags: Taxa
      *    })
      */
-    public function show(Fee $fee)
+    public function show(Fee $fee): JsonResponse
     {
         Gate::authorize('view', $fee);
 
@@ -66,7 +66,7 @@ class FeeController extends APIController
      *         tags: Taxa
      *    })
      */
-    public function update(UpdateFeeRequest $request, Fee $fee)
+    public function update(UpdateFeeRequest $request, Fee $fee): JsonResponse
     {
         Gate::authorize('update', $fee);
 
@@ -82,7 +82,7 @@ class FeeController extends APIController
      *         tags: Taxa
      *    })
      */
-    public function destroy(Fee $fee)
+    public function destroy(Fee $fee): JsonResponse
     {
         Gate::authorize('delete', $fee);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\UpdateSubledgerRequest;
 use App\Models\Subledger;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 
 class SubledgerController extends APIController
@@ -15,7 +16,7 @@ class SubledgerController extends APIController
      *         tags: Subledger
      *    })
      */
-    public function index()
+    public function index(): JsonResponse
     {
         Gate::authorize('viewAny', Subledger::class);
 
@@ -33,7 +34,7 @@ class SubledgerController extends APIController
      *          tags: Subledger
      *     })
      */
-    public function show(Subledger $subledger)
+    public function show(Subledger $subledger): JsonResponse
     {
         Gate::authorize('view', $subledger);
 
@@ -47,7 +48,7 @@ class SubledgerController extends APIController
      *          tags: Subledger
      *     })
      */
-    public function update(UpdateSubledgerRequest $request, Subledger $subledger)
+    public function update(UpdateSubledgerRequest $request, Subledger $subledger): JsonResponse
     {
         Gate::authorize('update', $subledger);
 
