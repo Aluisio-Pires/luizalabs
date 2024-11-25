@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
@@ -13,5 +15,6 @@ Route::middleware([EnsureFrontendRequestsAreStateful::class, 'auth:sanctum'])->n
     Route::post('/user', [AuthController::class, 'user'])->name('auth.user');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-    Route::apiResource('/transactions', App\Http\Controllers\API\TransactionController::class);
+    Route::apiResource('/transactions', TransactionController::class)->only(['index', 'store', 'show', 'update']);
+    Route::apiResource('/accounts', AccountController::class)->only(['index', 'store', 'show']);
 });
