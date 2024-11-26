@@ -36,7 +36,9 @@ class TransactionController extends Controller
     {
         Gate::authorize('create', Transaction::class);
         $service = new TransactionService;
-        dd($service->create($request->validated()));
+        $service->create($request->validated());
+
+        return redirect(route('accounts.index'));
     }
 
     /**

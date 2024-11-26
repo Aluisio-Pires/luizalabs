@@ -23,6 +23,7 @@ class AccountController extends Controller
         Gate::authorize('viewAny', Account::class);
         $accounts = Account::with(['user', 'transactions', 'inflows'])
             ->where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
             ->paginate(20);
 
         return Inertia::render('Account/Index', [
