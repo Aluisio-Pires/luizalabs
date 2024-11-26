@@ -1,11 +1,17 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { defineProps } from "vue";
-import {WhenVisible, Link} from "@inertiajs/vue3";
+import {WhenVisible, Link, usePage} from "@inertiajs/vue3";
 defineProps({
     accounts: Object,
     currentPage: Number
 });
+
+const page = usePage()
+Echo.private('Transaction.Report.' + page.props.auth.user.id)
+    .listen('.transaction.report', (e) => {
+        console.log(e);
+    });
 
 </script>
 

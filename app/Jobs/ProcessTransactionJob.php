@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\TransactionReport;
 use App\Http\Services\TransactionService;
 use App\Models\Transaction;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,7 +34,8 @@ class ProcessTransactionJob implements ShouldQueue
 
         if ($lock1->get() && $lock2->get()) {
             try {
-                (new TransactionService)->process($this->transaction);
+                $result = (new TransactionService)->process($this->transaction);
+                TransactionReport::dispatch($this->transaction->account->user_id, $result);
             } finally {
                 $lock1->release();
                 $lock2->release();
@@ -47,6 +49,11 @@ class ProcessTransactionJob implements ShouldQueue
     {
         $this->transaction->update([
             'status' => 'falha',
+            'message' => 'A transação falhou. Tente novamente mais tarde.',
+        ]);
+
+        TransactionReport::dispatch($this->transaction->account->user_id, [
+            'success' => false,
             'message' => 'A transação falhou. Tente novamente mais tarde.',
         ]);
     }
