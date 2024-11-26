@@ -2,9 +2,16 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { defineProps } from "vue";
 import {Link} from "@inertiajs/vue3";
-defineProps({
+let props = defineProps({
     account: Object,
 });
+
+Echo.private('Account.Report.' + props.account.id)
+    .listen('.account.report', (e) => {
+        if(e.id === props.account.id){
+            props.account.balance = e.balance;
+        }
+    });
 
 </script>
 

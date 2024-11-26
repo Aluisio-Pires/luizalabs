@@ -2,6 +2,8 @@
 
 namespace App\Http\Services;
 
+use App\Events\AccountUpdateReport;
+use App\Events\TransactionReport;
 use App\Jobs\ProcessTransactionJob;
 use App\Models\Account;
 use App\Models\Ledger;
@@ -111,6 +113,15 @@ class TransactionService
 
         $this->createSubledger($transaction, $account, 'Entrada');
 
+        AccountUpdateReport::dispatch($account->id, [
+            'id' => $account->id,
+            'balance' => $account->balance,
+            'credit_limit' => $account->credit_limit,
+            'changed' => $transaction->amount,
+            'operation' => 'deposito',
+            'message' => 'Valor creditado com sucesso',
+        ]);
+
         return $this->completeTransaction($transaction);
     }
 
@@ -121,6 +132,15 @@ class TransactionService
         ]);
 
         $this->createSubledger($transaction, $account, 'Saída');
+
+        AccountUpdateReport::dispatch($account->id, [
+            'id' => $account->id,
+            'balance' => $account->balance,
+            'credit_limit' => $account->credit_limit,
+            'changed' => $transaction->total,
+            'operation' => $transaction->type,
+            'message' => 'Valor debitado com sucesso',
+        ]);
 
         return $this->completeTransaction($transaction);
     }
@@ -135,21 +155,34 @@ class TransactionService
         ]);
 
         $this->createSubledger($transaction, $payee, 'Entrada');
+        AccountUpdateReport::dispatch($payee->id, [
+            'id' => $payee->id,
+            'balance' => $payee->balance,
+            'credit_limit' => $payee->credit_limit,
+            'changed' => $transaction->amount,
+            'operation' => $transaction->type,
+            'message' => 'Valor debitado com sucesso',
+        ]);
 
         return $this->completeTransaction($transaction);
     }
 
-    private function failTransaction(Transaction $transaction, string $message): array
+    private function failTransaction(Transaction $transaction, ?string $message = null): array
     {
         $transaction->update([
             'status' => 'falha',
             'message' => 'Saldo insuficiente para realizar essa transação.',
         ]);
 
-        return [
+        $result = [
             'success' => false,
-            'message' => 'Saldo insuficiente para realizar essa transação.',
+            'message' => $message ?: 'Saldo insuficiente para realizar essa transação.',
+            'transaction_id' => $transaction->getKey(),
         ];
+
+        TransactionReport::dispatch($transaction->account->user_id, $result);
+
+        return $result;
     }
 
     private function completeTransaction(Transaction $transaction): array
@@ -159,10 +192,15 @@ class TransactionService
             'message' => 'Transação realizada com sucesso',
         ]);
 
-        return [
+        $result = [
             'success' => true,
             'message' => 'Transação realizada com sucesso',
+            'transaction_id' => $transaction->getKey(),
         ];
+
+        TransactionReport::dispatch($transaction->account->user_id, $result);
+
+        return $result;
     }
 
     private function createSubledger(Transaction $transaction, Account $account, string $tipo): void

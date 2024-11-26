@@ -9,7 +9,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TransactionReport implements ShouldBroadcast
+class AccountUpdateReport implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -29,13 +29,13 @@ class TransactionReport implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('Transaction.Report.'.$this->id),
+            new PrivateChannel('Account.Report.'.$this->id),
         ];
     }
 
     public function broadcastAs(): string
     {
-        return 'transaction.report';
+        return 'account.report';
     }
 
     public function broadcastWith(): array
