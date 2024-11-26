@@ -39,6 +39,12 @@ class TransactionService
         ]);
 
         ProcessTransactionJob::dispatch($transaction);
+        ProcessTransactionJob::dispatch($transaction);
+        ProcessTransactionJob::dispatch($transaction);
+        ProcessTransactionJob::dispatch($transaction);
+        ProcessTransactionJob::dispatch($transaction);
+        ProcessTransactionJob::dispatch($transaction);
+        ProcessTransactionJob::dispatch($transaction);
 
         return $transaction;
     }

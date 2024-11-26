@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f95ad63b74a6d12195c684db6e9ea33",
+    "content-hash": "34d964cdc4c013073a57a8f37787d332",
     "packages": [
         {
             "name": "aluisio-pires/laravel-swagger-docs",
@@ -9940,7 +9940,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.2",
+        "ext-redis": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
