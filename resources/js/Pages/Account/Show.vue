@@ -38,10 +38,10 @@ Echo.private('Account.Report.' + props.account.id)
                 Número da Conta: {{ account.number }}
             </div>
             <div :class=" account.balance >= 0 ? 'text-green-500' : 'text-red-500'">
-                Saldo: {{ account.balance }}
+                Saldo: R$ {{ $formatNumber(account.balance) }}
             </div>
             <div :class=" account.balance >= 0 ? 'text-green-500' : 'text-red-500'">
-                Limite de Crédito: {{ account.credit_limit }}
+                Limite de Crédito: R$ {{ $formatNumber(account.credit_limit) }}
             </div>
         </div>
     </AppLayout>

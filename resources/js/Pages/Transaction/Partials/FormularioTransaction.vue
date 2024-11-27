@@ -7,6 +7,7 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ModalProcessing from "@/Pages/Transaction/Partials/ModalProcessing.vue";
+import NumberInput from "@/Components/NumberInput.vue";
 
 const props = defineProps({
     types: Object,
@@ -65,6 +66,7 @@ const submit = () => {
         })
         .catch((error) => {
             form.errors = error.response.data.errors;
+            enableSubmit.value = true;
         });
 }
 </script>
@@ -98,12 +100,12 @@ const submit = () => {
 
             <div class="mt-4">
                 <InputLabel for="amount" value="Valor"/>
-                <TextInput
+                <NumberInput
                     id="amount"
                     v-model="form.amount"
                     type="number"
                     class="mt-1 block w-full"
-                    placeholder="1000.00"
+                    placeholder="1000,00"
                     required
                 />
                 <InputError class="mt-2" v-for="error in form.errors.amount" :message="error"/>

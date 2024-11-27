@@ -4,6 +4,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import NumberInput from "@/Components/NumberInput.vue";
 
 const form = useForm({
     balance: "",
@@ -23,12 +24,12 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="balance" value="Saldo" />
-                <TextInput
+                <NumberInput
                     id="balance"
                     v-model="form.balance"
                     type="number"
                     class="mt-1 block w-full"
-                    placeholder="1000.00"
+                    placeholder="1000,00"
                     required
                     autofocus
                 />
@@ -37,13 +38,14 @@ const submit = () => {
 
             <div class="mt-4">
                 <InputLabel for="credit_limit" value="Limite de Crédito" />
-                <TextInput
+
+                <NumberInput
                     id="credit_limit"
                     v-model="form.credit_limit"
                     type="number"
                     class="mt-1 block w-full"
                     required
-                    placeholder="1000.00"
+                    placeholder="1000,00"
                 />
                 <InputError class="mt-2" :message="form.errors.credit_limit" />
             </div>
