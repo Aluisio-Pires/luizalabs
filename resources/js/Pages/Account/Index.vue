@@ -2,7 +2,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { defineProps } from "vue";
 import { WhenVisible, Link, usePage } from "@inertiajs/vue3";
-import Account from "@/Pages/Account/Account.vue";
+import Account from "@/Pages/Account/Partials/Account.vue";
 defineProps({
     accounts: Object,
     currentPage: Number,

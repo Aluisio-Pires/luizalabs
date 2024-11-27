@@ -1,9 +1,12 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { defineProps } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, WhenVisible } from "@inertiajs/vue3";
+import Subledgers from "@/Pages/Account/Partials/Subledger.vue";
 let props = defineProps({
     account: Object,
+    subledgers: Object,
+    currentPage: Number,
 });
 
 Echo.private("Account.Report." + props.account.id).listen(
@@ -51,6 +54,31 @@ Echo.private("Account.Report." + props.account.id).listen(
             >
                 Limite de Crédito: R$ {{ $formatNumber(account.credit_limit) }}
             </div>
+        </div>
+        <div class="w-full grid grid-cols-12 bg-gray-100 px-2 lg:px-8 py-8">
+            <div class="col-span-3 text-center">Nome</div>
+            <div class="col-span-3 text-center">Valor</div>
+            <div class="col-span-3 text-center">Data</div>
+            <div class="col-span-3 text-center">Opções</div>
+        </div>
+        <div
+            v-for="subledger in subledgers"
+            :key="subledger.id"
+            class="grid grid-cols-12 bg-gray-50 py-8 px-2 lg:px-8"
+        >
+            <Subledgers :subledger="subledger" />
+            <WhenVisible
+                always
+                :params="{
+                    data: {
+                        page: currentPage + 1,
+                    },
+                    only: ['subledgers', 'currentPage'],
+                    preserveUrl: true,
+                }"
+            >
+                <div v-show="false">loading...</div>
+            </WhenVisible>
         </div>
     </AppLayout>
 </template>

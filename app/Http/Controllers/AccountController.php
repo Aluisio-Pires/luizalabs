@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Subledger;
 use App\Models\Transaction;
 use App\Models\TransactionType;
 use Illuminate\Http\JsonResponse;
@@ -21,8 +22,7 @@ class AccountController extends Controller
     public function index(): Response
     {
         Gate::authorize('viewAny', Account::class);
-        $accounts = Account::with(['user', 'transactions', 'inflows'])
-            ->where('user_id', auth()->user()->id)
+        $accounts = Account::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
@@ -63,9 +63,13 @@ class AccountController extends Controller
     public function show(Account $account): Response
     {
         Gate::authorize('view', $account);
-        $account->load(['user', 'transactions', 'inflows']);
+        $subledgers = Subledger::with('ledger')->where('account_id', $account->id)->orderBy('created_at', 'desc')->paginate(3);
 
-        return Inertia::render('Account/Show', ['account' => $account]);
+        return Inertia::render('Account/Show', [
+            'account' => $account,
+            'subledgers' => Inertia::merge(fn () => $subledgers->items()),
+            'currentPage' => $subledgers->currentPage(),
+        ]);
     }
 
     /**
