@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TransactionType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,6 +29,7 @@ class UpdateFeeRequest extends FormRequest
             'type' => ['sometimes', 'string', 'in:fixed,percentage'],
             'value' => ['sometimes', 'decimal:2', 'min:0'],
             'transaction_type_name' => ['sometimes', 'exists:transaction_types,slug'],
+            'transaction_type_id' => ['sometimes'],
         ];
     }
 
@@ -40,5 +42,16 @@ class UpdateFeeRequest extends FormRequest
             'value' => 'Valor',
             'transaction_type_name' => 'Tipo de Transação',
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        if ($this->has('transaction_type_name')) {
+            $transactionType = TransactionType::where('slug', $this->transaction_type_name)->first();
+
+            $this->merge([
+                'transaction_type_id' => $transactionType?->getKey(),
+            ]);
+        }
     }
 }

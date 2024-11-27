@@ -43,7 +43,14 @@ class AuthController extends APIController
         $user = User::where('email', $data['email'])->first();
 
         if (! $user || ! Hash::check($data['password'], $user->password)) {
-            return $this->error([], 'Invalid credentials.');
+            return $this->error(
+                [
+                    'email' => [
+                        'As credenciais fornecidas estão incorretas.',
+                    ],
+                ],
+                'Credenciais inválidas.'
+            );
         }
 
         $token = $user->createToken('apiToken')->plainTextToken;
@@ -69,7 +76,7 @@ class AuthController extends APIController
             $token->delete();
         }
 
-        return response()->json(['message' => 'Logged out successfully']);
+        return $this->response(['message' => 'Logout efetuado com sucesso.']);
     }
 
     /**

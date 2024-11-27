@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\TransactionType;
 use Symfony\Component\HttpFoundation\Response;
 
 test('can create fees', function (): void {
@@ -9,7 +8,7 @@ test('can create fees', function (): void {
         'description' => 'Taxa Teste Description',
         'type' => 'fixed',
         'value' => '10.00',
-        'transaction_type_id' => TransactionType::where('slug', 'deposito')->first()->id,
+        'transaction_type_name' => 'saque',
     ];
 
     $this->authRequest('post',

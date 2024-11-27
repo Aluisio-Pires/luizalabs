@@ -38,6 +38,7 @@ class FeeController extends APIController
     public function store(StoreFeeRequest $request): JsonResponse
     {
         Gate::authorize('create', Fee::class);
+
         $fee = Fee::create($request->validated());
 
         return $this->response([

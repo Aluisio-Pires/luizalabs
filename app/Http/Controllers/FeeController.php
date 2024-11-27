@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFeeRequest;
 use App\Http\Requests\UpdateFeeRequest;
 use App\Models\Fee;
-use App\Models\TransactionType;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
@@ -42,14 +41,7 @@ class FeeController extends Controller
     {
         Gate::authorize('create', Fee::class);
 
-        $transactionType = TransactionType::where('slug', $request->transaction_type_name)->first();
-        Fee::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'type' => $request->type,
-            'value' => $request->value,
-            'transaction_type_id' => $transactionType->getKey(),
-        ]);
+        Fee::create($request->validated());
 
         return redirect(route('fees.index'));
     }
@@ -73,14 +65,7 @@ class FeeController extends Controller
     {
         Gate::authorize('update', $fee);
 
-        $transactionType = TransactionType::where('slug', $request->transaction_type_name)->first();
-        $fee->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'type' => $request->type,
-            'value' => $request->value,
-            'transaction_type_id' => $transactionType->getKey(),
-        ]);
+        $fee->update($request->validated());
 
         return redirect(route('fees.index'));
     }

@@ -19,7 +19,6 @@ abstract class APIController
         return response()->json([
             'message' => $message,
             'errors' => $errors,
-            'status' => $status,
-        ]);
+        ], $status);
     }
 }
