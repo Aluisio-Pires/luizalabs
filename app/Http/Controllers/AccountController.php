@@ -10,14 +10,15 @@ use App\Models\TransactionType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\Response as InertiaResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends Controller
 {
     /**
      * Retorna uma lista de contas.
      */
-    public function index(): Response
+    public function index(): InertiaResponse
     {
         Gate::authorize('viewAny', Account::class);
         $accounts = Account::where('user_id', auth()->user()->id)
@@ -33,7 +34,7 @@ class AccountController extends Controller
     /**
      * Mostra página de criação de contas.
      */
-    public function create()
+    public function create(): InertiaResponse
     {
         Gate::authorize('create', Account::class);
 
@@ -52,13 +53,13 @@ class AccountController extends Controller
             'credit_limit' => $request->credit_limit,
         ]);
 
-        return redirect()->route('accounts.show', $account);
+        return redirect(route('accounts.show', $account), Response::HTTP_CREATED);
     }
 
     /**
      * Mostra os dados da conta.
      */
-    public function show(Account $account): Response
+    public function show(Account $account): InertiaResponse
     {
         Gate::authorize('view', $account);
         $subledgers = Subledger::with('ledger')->where('account_id', $account->id)->orderBy('created_at', 'desc')->paginate(3);
@@ -73,7 +74,7 @@ class AccountController extends Controller
     /**
      * Mostra página de criação de Transações.
      */
-    public function createTransaction(Account $account)
+    public function createTransaction(Account $account): InertiaResponse
     {
         Gate::authorize('create', Transaction::class);
         $types = TransactionType::all();

@@ -1,5 +1,6 @@
 /.phpunit.cache
 /bootstrap/ssr
+/coverage-report
 /node_modules
 /public/build
 /public/hot

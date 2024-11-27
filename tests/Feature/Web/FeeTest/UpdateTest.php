@@ -13,8 +13,8 @@ test('can update a fee', function (): void {
     ];
 
     $this->authRequest('put',
-        route('api.v1.fees.update', ['fee' => $fee->id]),
-        Response::HTTP_OK,
+        route('fees.update', ['fee' => $fee->id]),
+        Response::HTTP_FOUND,
         $request
     );
 });

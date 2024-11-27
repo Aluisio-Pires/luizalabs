@@ -203,7 +203,7 @@ class TransactionService
         return $result;
     }
 
-    private function createSubledger(Transaction $transaction, Account $account, string $tipo): void
+    public function createSubledger(Transaction $transaction, Account $account, string $tipo): void
     {
         $ledger = Ledger::where('name', $tipo)->first();
 

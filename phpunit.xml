@@ -12,9 +12,14 @@
             <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
+    <coverage>
+        <report>
+            <html outputDirectory="coverage-report" />
+        </report>
+    </coverage>
     <source>
         <include>
-            <directory>app</directory>
+            <directory>app/Http/</directory>
         </include>
     </source>
     <php>
