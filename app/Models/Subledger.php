@@ -27,7 +27,7 @@ class Subledger extends Model
     ];
 
     protected $appends = [
-        'formatted_created_at'
+        'formatted_created_at',
     ];
 
     public function formattedCreatedAt(): Attribute
