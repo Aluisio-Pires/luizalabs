@@ -8,12 +8,6 @@ defineProps({
     currentPage: Number
 });
 
-const page = usePage()
-Echo.private('Transaction.Report.' + page.props.auth.user.id)
-    .listen('.transaction.report', (e) => {
-        console.log(e);
-    });
-
 </script>
 
 <template>

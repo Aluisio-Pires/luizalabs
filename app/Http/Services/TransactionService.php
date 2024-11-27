@@ -28,7 +28,7 @@ class TransactionService
         $total = $fee + $request['amount'];
 
         $transaction = Transaction::create([
-            'description' => $request['description'],
+            'description' => $request['description'] ?? null,
             'type' => $request['type'],
             'status' => 'pendente',
             'message' => null,
