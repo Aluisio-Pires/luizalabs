@@ -14,7 +14,7 @@ class Micron implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): float
     {
-        return round($value / 1000000, 2);
+        return round($value / 1000000, 6);
     }
 
     /**
