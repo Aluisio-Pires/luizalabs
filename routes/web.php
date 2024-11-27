@@ -25,9 +25,9 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    Route::resource('accounts', AccountController::class);
-    Route::resource('transactions', TransactionController::class);
-    Route::resource('subledgers', SubledgerController::class);
-    Route::resource('fees', FeeController::class);
     Route::get('accounts/{account}/transactions/create', [AccountController::class, 'createTransaction'])->name('accounts.createTransaction');
+    Route::resource('accounts', AccountController::class)->only('index', 'create', 'store', 'show');
+    Route::resource('transactions', TransactionController::class)->only('create', 'store');
+    Route::resource('subledgers', SubledgerController::class)->only('show');
+    Route::resource('fees', FeeController::class)->except('show');
 });

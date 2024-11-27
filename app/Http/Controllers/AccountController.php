@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAccountRequest;
-use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
 use App\Models\Subledger;
 use App\Models\Transaction;
 use App\Models\TransactionType;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -70,49 +68,6 @@ class AccountController extends Controller
             'subledgers' => Inertia::merge(fn () => $subledgers->items()),
             'currentPage' => $subledgers->currentPage(),
         ]);
-    }
-
-    /**
-     * Exibe a página de editar a conta.
-     */
-    public function edit(Account $account)
-    {
-        Gate::authorize('update', $account);
-        //
-    }
-
-    /**
-     * Atualiza a conta.
-     */
-    public function update(UpdateAccountRequest $request, Account $account): JsonResponse
-    {
-        Gate::authorize('update', $account);
-        $validated = $request->validated();
-        $account->update($validated);
-
-        return response()->json($account);
-    }
-
-    /**
-     * Desativa a conta.
-     */
-    public function destroy(Account $account): JsonResponse
-    {
-        Gate::authorize('delete', $account);
-        $account->delete();
-
-        return response()->json(null, 204);
-    }
-
-    /**
-     * Restaura a conta.
-     */
-    public function restore(Account $account): JsonResponse
-    {
-        Gate::authorize('restore', $account);
-        $account->restore();
-
-        return response()->json($account);
     }
 
     /**

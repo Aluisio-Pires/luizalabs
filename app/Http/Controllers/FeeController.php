@@ -55,14 +55,6 @@ class FeeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Fee $fee)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Fee $fee)
@@ -98,6 +90,10 @@ class FeeController extends Controller
      */
     public function destroy(Fee $fee)
     {
-        //
+        Gate::authorize('delete', $fee);
+
+        $fee->delete();
+
+        return redirect(route('fees.index'));
     }
 }
