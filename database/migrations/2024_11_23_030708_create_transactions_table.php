@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('description')->nullable();
             $table->string('type');
-            $table->string('status');
+            $table->enum('status', ['pendente', 'sucesso', 'falha'])->default('pendente');
             $table->text('message')->nullable();
 
             $table->bigInteger('amount')->default(0); //Valor em Microns
