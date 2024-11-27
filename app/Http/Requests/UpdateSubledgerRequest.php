@@ -23,6 +23,7 @@ class UpdateSubledgerRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => ['sometimes', 'nullable', 'string', 'max:255'],
             'description' => ['sometimes', 'nullable', 'string', 'max:1000'],
         ];
     }

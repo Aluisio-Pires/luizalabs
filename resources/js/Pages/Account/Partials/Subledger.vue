@@ -34,7 +34,7 @@ let props = defineProps({
     <div class="col-span-3 text-center flex">
         <Link
             class="mx-auto"
-            :href="route('accounts.index')"
+            :href="route('subledgers.show', subledger.id)"
             title="Visualizar"
         >
             <svg

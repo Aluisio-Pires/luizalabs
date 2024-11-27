@@ -32,7 +32,7 @@ defineProps({
             <div class="col-span-3 text-center">Número da Conta</div>
             <div class="col-span-3 text-center">Saldo</div>
             <div class="col-span-3 text-center">Limite de Crédito</div>
-            <div class="col-span-3 text-center">Opções</div>
+            <div class="col-span-3 text-center">Visualizar</div>
         </div>
         <div
             v-for="account in accounts"

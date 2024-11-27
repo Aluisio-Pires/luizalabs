@@ -59,7 +59,7 @@ Echo.private("Account.Report." + props.account.id).listen(
             <div class="col-span-3 text-center">Nome</div>
             <div class="col-span-3 text-center">Valor</div>
             <div class="col-span-3 text-center">Data</div>
-            <div class="col-span-3 text-center">Opções</div>
+            <div class="col-span-3 text-center">Visualizar</div>
         </div>
         <div
             v-for="subledger in subledgers"

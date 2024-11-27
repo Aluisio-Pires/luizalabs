@@ -13,7 +13,7 @@ class TransactionTypeSeeder extends Seeder
     public function run(): void
     {
         TransactionType::create([
-            'name' => 'Deposito',
+            'name' => 'Depósito',
             'slug' => 'deposito',
             'description' => 'Adiciona fundos ao saldo da conta',
         ]);
