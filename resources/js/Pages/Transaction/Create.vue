@@ -17,7 +17,11 @@ defineProps({
         </template>
         <div class="w-full">
             <div class="w-full lg:w-2/3 mx-auto">
-                <FormularioTransaction class="mt-[69px] mx-auto" :account="account" :types="types"/>
+                <FormularioTransaction
+                    class="mt-[69px] mx-auto"
+                    :account="account"
+                    :types="types"
+                />
             </div>
         </div>
     </AppLayout>

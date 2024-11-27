@@ -1,29 +1,37 @@
 <script setup>
-import {Link} from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
 
 let props = defineProps({
-    account: Object
+    account: Object,
 });
 
-Echo.private('Account.Report.' + props.account.id)
-    .listen('.account.report', (e) => {
+Echo.private("Account.Report." + props.account.id).listen(
+    ".account.report",
+    (e) => {
         if (e.id === props.account.id) {
             props.account.balance = e.balance;
         }
-    });
+    },
+);
 
 const round = (value, precision = 2) => {
     return value.toFixed(precision);
-}
+};
 </script>
 <template>
     <div class="col-span-3 text-center">
         {{ account.number }}
     </div>
-    <div class="col-span-3 text-center" :class=" account.balance >= 0 ? 'text-green-500' : 'text-red-500'">
+    <div
+        class="col-span-3 text-center"
+        :class="account.balance >= 0 ? 'text-green-500' : 'text-red-500'"
+    >
         R$ {{ $formatNumber(account.balance) }}
     </div>
-    <div class="col-span-3 text-center" :class=" account.credit_limit >= 0 ? 'text-green-500' : 'text-red-500'">
+    <div
+        class="col-span-3 text-center"
+        :class="account.credit_limit >= 0 ? 'text-green-500' : 'text-red-500'"
+    >
         R$ {{ $formatNumber(account.credit_limit) }}
     </div>
     <div class="col-span-3 text-center flex">

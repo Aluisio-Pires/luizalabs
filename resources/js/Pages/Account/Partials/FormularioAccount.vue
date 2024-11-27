@@ -1,6 +1,5 @@
 <script setup>
-import {useForm} from "@inertiajs/vue3";
-import TextInput from "@/Components/TextInput.vue";
+import { useForm } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -13,8 +12,8 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('accounts.store'), {
-        onSuccess: () => form.reset('balance', 'credit_limit'),
+    form.post(route("accounts.store"), {
+        onSuccess: () => form.reset("balance", "credit_limit"),
     });
 };
 </script>
@@ -51,7 +50,11 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton
+                    class="ms-4"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                >
                     Criar Conta
                 </PrimaryButton>
             </div>

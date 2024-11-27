@@ -7,25 +7,25 @@
         @input="handleInput"
         @blur="handleBlur"
         @keydown="handleKeyDown"
-    >
+    />
 </template>
 
 <script setup>
-import { onMounted, ref, defineProps, defineEmits, computed } from 'vue';
+import { onMounted, ref, defineProps, defineEmits, computed } from "vue";
 
 const props = defineProps({
     modelValue: {
         type: String,
-        default: '',
+        default: "",
     },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const input = ref(null);
 
 onMounted(() => {
-    if (input.value.hasAttribute('autofocus')) {
+    if (input.value.hasAttribute("autofocus")) {
         input.value.focus();
     }
 });
@@ -33,10 +33,10 @@ onMounted(() => {
 defineExpose({ focus: () => input.value.focus() });
 
 const displayValue = computed(() => {
-    if (props.modelValue === '' || props.modelValue === null) {
-        return '';
+    if (props.modelValue === "" || props.modelValue === null) {
+        return "";
     }
-    return props.modelValue.replace('.', ',');
+    return props.modelValue.replace(".", ",");
 });
 
 const MAX_VALUE = 9999999999999.99;
@@ -44,58 +44,83 @@ const MAX_VALUE = 9999999999999.99;
 const handleInput = (event) => {
     let value = event.target.value;
 
-    value = value.replace(',', '.');
+    value = value.replace(",", ".");
 
-    value = value.replace(/[^\d.,]/g, '');
+    value = value.replace(/[^\d.,]/g, "");
 
     if ((value.match(/[.,]/g) || []).length > 1) {
-        value = value.slice(0, value.lastIndexOf('.') > value.lastIndexOf(',') ? value.lastIndexOf('.') : value.lastIndexOf(','));
+        value = value.slice(
+            0,
+            value.lastIndexOf(".") > value.lastIndexOf(",")
+                ? value.lastIndexOf(".")
+                : value.lastIndexOf(","),
+        );
     }
 
     const parts = value.split(/[.,]/);
     if (parts[1] && parts[1].length > 2) {
-        value = parts[0] + '.' + parts[1].slice(0, 2);
+        value = parts[0] + "." + parts[1].slice(0, 2);
     }
 
-    let numericValue = parseFloat(value.replace(',', '.'));
+    let numericValue = parseFloat(value.replace(",", "."));
     if (numericValue > MAX_VALUE) {
         numericValue = MAX_VALUE;
     }
 
-    emit('update:modelValue', isNaN(numericValue) ? '' : numericValue.toString());
+    emit(
+        "update:modelValue",
+        isNaN(numericValue) ? "" : numericValue.toString(),
+    );
 };
 
 const handleBlur = () => {
-    if (props.modelValue === '') return;
+    if (props.modelValue === "") return;
 
     let numericValue = parseFloat(props.modelValue);
 
     if (isNaN(numericValue)) {
-        emit('update:modelValue', '');
+        emit("update:modelValue", "");
     } else {
         numericValue = Math.min(numericValue, MAX_VALUE).toFixed(2);
-        emit('update:modelValue', numericValue);
+        emit("update:modelValue", numericValue);
     }
 };
 
 const handleKeyDown = (event) => {
     const currentValue = event.target.value;
 
-    if (!/[0-9.,]/.test(event.key) && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(event.key)) {
+    if (
+        !/[0-9.,]/.test(event.key) &&
+        !["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(
+            event.key,
+        )
+    ) {
         event.preventDefault();
     }
 
-    if ((event.key === '.' || event.key === ',') && (currentValue.includes('.') || currentValue.includes(','))) {
+    if (
+        (event.key === "." || event.key === ",") &&
+        (currentValue.includes(".") || currentValue.includes(","))
+    ) {
         event.preventDefault();
     }
 
-    const decimalIndex = currentValue.indexOf('.') > -1 ? currentValue.indexOf('.') : currentValue.indexOf(',');
-    if (decimalIndex !== -1 && currentValue.length - decimalIndex > 2 && /[0-9]/.test(event.key)) {
+    const decimalIndex =
+        currentValue.indexOf(".") > -1
+            ? currentValue.indexOf(".")
+            : currentValue.indexOf(",");
+    if (
+        decimalIndex !== -1 &&
+        currentValue.length - decimalIndex > 2 &&
+        /[0-9]/.test(event.key)
+    ) {
         event.preventDefault();
     }
 
     const nextValue = currentValue + event.key;
-    let numericValue = parseFloat(nextValue.replace(',', '.').replace(/[^\d.]/g, ''));
+    let numericValue = parseFloat(
+        nextValue.replace(",", ".").replace(/[^\d.]/g, ""),
+    );
     if (!isNaN(numericValue) && numericValue > MAX_VALUE) {
         event.preventDefault();
     }
