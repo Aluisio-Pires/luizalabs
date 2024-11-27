@@ -24,7 +24,21 @@ class UpdateFeeRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string', 'max:255'],
-            'description' => ['sometimes', 'nullable', 'string', 'max:1000'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'type' => ['sometimes', 'string', 'in:fixed,percentage'],
+            'value' => ['sometimes', 'decimal:2', 'min:0'],
+            'transaction_type_name' => ['sometimes', 'exists:transaction_types,slug'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'type' => 'Tipo de Taxação',
+            'value' => 'Valor',
+            'transaction_type_name' => 'Tipo de Transação',
         ];
     }
 }

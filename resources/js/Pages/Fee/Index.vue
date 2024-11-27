@@ -2,9 +2,9 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { defineProps } from "vue";
 import { WhenVisible, Link, usePage } from "@inertiajs/vue3";
-import Account from "@/Pages/Account/Partials/Account.vue";
+import Fee from "@/Pages/Fee/Partials/Fee.vue";
 defineProps({
-    accounts: Object,
+    fees: Object,
     currentPage: Number,
 });
 </script>
@@ -16,30 +16,30 @@ defineProps({
                 <h2
                     class="font-semibold text-xl text-gray-800 leading-tight my-auto"
                 >
-                    Contas
+                    Taxas
                 </h2>
                 <Link
-                    :href="route('accounts.create')"
+                    :href="route('fees.create')"
                     class="bg-green-500 text-white py-2 px-4 rounded"
                     prefetch="mount"
                     :cacheFor="['30m', '30m']"
                 >
-                    Criar Conta
+                    Criar Taxa
                 </Link>
             </div>
         </template>
         <div class="grid grid-cols-12 bg-gray-100 px-2 lg:px-8 py-8">
-            <div class="col-span-3 text-center">Número da Conta</div>
-            <div class="col-span-3 text-center">Saldo</div>
-            <div class="col-span-3 text-center">Limite de Crédito</div>
-            <div class="col-span-3 text-center">Visualizar</div>
+            <div class="col-span-3 text-center">Nome</div>
+            <div class="col-span-3 text-center">Valor</div>
+            <div class="col-span-3 text-center">Transação Associada</div>
+            <div class="col-span-3 text-center">Atualizar Taxa</div>
         </div>
         <div
-            v-for="account in accounts"
-            :key="account.id"
+            v-for="fee in fees"
+            :key="fee.id"
             class="grid grid-cols-12 bg-gray-50 py-8 px-2 lg:px-8"
         >
-            <Account :account="account" />
+            <Fee :fee="fee" />
         </div>
         <WhenVisible
             always
@@ -47,7 +47,7 @@ defineProps({
                 data: {
                     page: currentPage + 1,
                 },
-                only: ['accounts', 'currentPage'],
+                only: ['fees', 'currentPage'],
                 preserveUrl: true,
             }"
         >

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\FeeController;
 use App\Http\Controllers\SubledgerController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
@@ -27,5 +28,6 @@ Route::middleware([
     Route::resource('accounts', AccountController::class);
     Route::resource('transactions', TransactionController::class);
     Route::resource('subledgers', SubledgerController::class);
+    Route::resource('fees', FeeController::class);
     Route::get('accounts/{account}/transactions/create', [AccountController::class, 'createTransaction'])->name('accounts.createTransaction');
 });

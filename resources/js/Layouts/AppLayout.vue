@@ -56,9 +56,19 @@ const logout = () => {
                             >
                                 <NavLink
                                     :href="route('accounts.index')"
-                                    :active="route().current('accounts.index')"
+                                    :active="route().current('accounts.*')"
                                 >
                                     Contas
+                                </NavLink>
+                            </div>
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('fees.index')"
+                                    :active="route().current('fees.*')"
+                                >
+                                    Taxas
                                 </NavLink>
                             </div>
                         </div>

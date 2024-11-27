@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFeeRequest;
 use App\Http\Requests\UpdateFeeRequest;
 use App\Models\Fee;
+use App\Models\TransactionType;
+use Illuminate\Support\Facades\Gate;
+use Inertia\Inertia;
 
 class FeeController extends Controller
 {
@@ -13,7 +16,13 @@ class FeeController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('viewAny', Fee::class);
+        $fees = Fee::with('transactionType')->orderBy('created_at', 'desc')->paginate(3);
+
+        return Inertia::render('Fee/Index', [
+            'fees' => Inertia::merge(fn () => $fees->items()),
+            'currentPage' => $fees->currentPage(),
+        ]);
     }
 
     /**
@@ -21,7 +30,9 @@ class FeeController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('create', Fee::class);
+
+        return Inertia::render('Fee/Create');
     }
 
     /**
@@ -29,7 +40,18 @@ class FeeController extends Controller
      */
     public function store(StoreFeeRequest $request)
     {
-        //
+        Gate::authorize('create', Fee::class);
+
+        $transactionType = TransactionType::where('slug', $request->transaction_type_name)->first();
+        Fee::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'type' => $request->type,
+            'value' => $request->value,
+            'transaction_type_id' => $transactionType->getKey(),
+        ]);
+
+        return redirect(route('fees.index'));
     }
 
     /**
@@ -45,7 +67,11 @@ class FeeController extends Controller
      */
     public function edit(Fee $fee)
     {
-        //
+        Gate::authorize('update', $fee);
+
+        return Inertia::render('Fee/Edit', [
+            'fee' => $fee->load(['transactionType']),
+        ]);
     }
 
     /**
@@ -53,7 +79,18 @@ class FeeController extends Controller
      */
     public function update(UpdateFeeRequest $request, Fee $fee)
     {
-        //
+        Gate::authorize('update', $fee);
+
+        $transactionType = TransactionType::where('slug', $request->transaction_type_name)->first();
+        $fee->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'type' => $request->type,
+            'value' => $request->value,
+            'transaction_type_id' => $transactionType->getKey(),
+        ]);
+
+        return redirect(route('fees.index'));
     }
 
     /**

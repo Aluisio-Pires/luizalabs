@@ -27,7 +27,18 @@ class StoreFeeRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:1000'],
             'type' => ['required', 'string', 'in:fixed,percentage'],
             'value' => ['required', 'decimal:2', 'min:0'],
-            'transaction_type_id' => ['required', 'exists:transaction_types,id'],
+            'transaction_type_name' => ['required', 'exists:transaction_types,slug'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'type' => 'Tipo de Taxação',
+            'value' => 'Valor',
+            'transaction_type_name' => 'Tipo de Transação',
         ];
     }
 }
