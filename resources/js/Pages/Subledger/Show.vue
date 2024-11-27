@@ -31,7 +31,6 @@ const submit = () => {
                 form.errors = error.response.data.errors;
             });
     }
-    console.log("click");
 };
 </script>
 
@@ -40,7 +39,7 @@ const submit = () => {
         <template #header>
             <div class="w-full grid grid-cols-1 lg:grid-cols-3 items-center">
                 <div v-if="!editarNome" @click.stop="editarNome = true">
-                    <div v-if="form.name" class="text-center">
+                    <div v-if="form.name" class="text-center text-gray-700">
                         {{ form.name }}
                     </div>
                     <div v-else class="text-center text-gray-500">
@@ -77,19 +76,22 @@ const submit = () => {
                             : $formatNumber(-1 * subledger.value)
                     }}
                 </div>
-                <div class="text-center mt-2">
+                <div class="text-center mt-2 text-gray-700">
                     {{ subledger.formatted_created_at }}
                 </div>
             </div>
         </template>
         <div class="w-full bg-gray-100 px-2 lg:px-8">
             <div class="bg-gray-50 rounded-lg py-8 px-4 w-full mt-4">
-                <div class="text-center">Descrição</div>
+                <div class="text-center font-bold">Descrição</div>
                 <div
                     v-if="!editarDescricao"
                     @click.stop="editarDescricao = true"
                 >
-                    <div v-if="form.description" class="text-center">
+                    <div
+                        v-if="form.description"
+                        class="text-center text-gray-700"
+                    >
                         {{ form.description }}
                     </div>
                     <div v-else class="text-center text-gray-500">
@@ -113,15 +115,15 @@ const submit = () => {
                 </div>
             </div>
             <div class="bg-gray-50 rounded-lg py-8 px-4 w-full mt-4">
-                <div class="text-center">Taxa</div>
-                <div class="text-center">
+                <div class="text-center font-bold">Taxa</div>
+                <div class="text-center text-gray-700">
                     R$
                     {{ $formatNumber(subledger.fee) }}
                 </div>
             </div>
             <div class="bg-gray-50 rounded-lg py-8 px-4 w-full mt-4">
-                <div class="text-center">Tipo de Transação</div>
-                <div class="text-center">
+                <div class="text-center font-bold">Tipo de Transação</div>
+                <div class="text-center text-gray-700">
                     {{ subledger.transaction.transaction_type.name }}
                 </div>
             </div>
@@ -135,14 +137,14 @@ const submit = () => {
                         subledger.transaction.account_id
                     "
                 >
-                    <div class="text-center">Transferido para</div>
-                    <div class="text-center">
+                    <div class="text-center font-bold">Transferido para</div>
+                    <div class="text-center text-gray-700">
                         {{ subledger.transaction.payee.user.name }}
                     </div>
                 </div>
                 <div v-else>
-                    <div class="text-center">Recebido de</div>
-                    <div class="text-center">
+                    <div class="text-center font-bold">Recebido de</div>
+                    <div class="text-center text-gray-700">
                         {{ subledger.transaction.account.user.name }}
                     </div>
                 </div>
