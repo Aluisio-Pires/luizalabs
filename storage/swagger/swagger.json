@@ -1,14 +1,14 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Laravel",
+        "title": "Luizalabs - Conta Corrente",
         "description": "Documentation for the Application API",
         "version": "1.0.0"
     },
     "servers": [
         {
             "url": "http://127.0.0.1:9000/api",
-            "description": "Laravel Server #1"
+            "description": "Luizalabs - Conta Corrente Server #1"
         }
     ],
     "paths": {
@@ -848,6 +848,95 @@
                     }
                 ]
             }
+        },
+        "/v1/trails": {
+            "get": {
+                "summary": "Recupera uma lista paginada de trails.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "tags": [
+                    "Trail"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "action",
+                        "description": "",
+                        "required": false,
+                        "enum": [
+                            "created",
+                            "updated",
+                            "deleted"
+                        ]
+                    },
+                    {
+                        "in": "query",
+                        "name": "relation_name",
+                        "description": "",
+                        "required": false,
+                        "enum": [
+                            "accounts",
+                            "transactions"
+                        ]
+                    },
+                    {
+                        "in": "query",
+                        "name": "relation_id",
+                        "description": "",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/v1/trails/{trail}": {
+            "get": {
+                "summary": "Exibe uma trail em espec\u00edfica.",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "tags": [
+                    "Trail"
+                ],
+                "parameters": [
+                    {
+                        "name": "trail",
+                        "in": "path",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "tags": [],
@@ -866,7 +955,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 7108827034380069919
+                        "example": 7804812489262503514
                     },
                     "number": {
                         "name": "number",
@@ -878,7 +967,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 2577922782386860289
+                        "example": 3573783026162154277
                     },
                     "balance": {
                         "name": "balance",
@@ -890,7 +979,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 9191652710996668255
+                        "example": 3753802649090288518
                     },
                     "credit_limit": {
                         "name": "credit_limit",
@@ -902,7 +991,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 5087660073455393811
+                        "example": 4873629282399559625
                     },
                     "user_id": {
                         "name": "user_id",
@@ -914,7 +1003,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 2287767893562094516
+                        "example": 2663848620920211613
                     },
                     "deleted_at": {
                         "name": "deleted_at",
@@ -973,6 +1062,13 @@
                             "type": "object",
                             "$ref": "#/components/schemas/Subledger"
                         }
+                    },
+                    "trails": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Trail"
+                        }
                     }
                 },
                 "required": [
@@ -996,7 +1092,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 3225697720808459332
+                        "example": 1146579381539809232
                     },
                     "name": {
                         "name": "name",
@@ -1042,7 +1138,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 2941157177390878200
+                        "example": 8866007773264978378
                     },
                     "transaction_type_id": {
                         "name": "transaction_type_id",
@@ -1054,7 +1150,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 2428519923579384958
+                        "example": 8909011228323765431
                     },
                     "created_at": {
                         "name": "created_at",
@@ -1104,7 +1200,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 2574677892878402184
+                        "example": 7648064749042025245
                     },
                     "name": {
                         "name": "name",
@@ -1177,7 +1273,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 8973819857069328455
+                        "example": 4931686654109297093
                     },
                     "name": {
                         "name": "name",
@@ -1212,7 +1308,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 1819427940331791715
+                        "example": 1327071594018545250
                     },
                     "fee": {
                         "name": "fee",
@@ -1224,7 +1320,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 3687031547414747372
+                        "example": 5082052372825279065
                     },
                     "ledger_id": {
                         "name": "ledger_id",
@@ -1236,7 +1332,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 8220897506170735211
+                        "example": 9193048257258749517
                     },
                     "transaction_id": {
                         "name": "transaction_id",
@@ -1248,7 +1344,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 8310291587117071829
+                        "example": 1549905744521500383
                     },
                     "account_id": {
                         "name": "account_id",
@@ -1260,7 +1356,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 7079841153188272663
+                        "example": 1843912268883686166
                     },
                     "created_at": {
                         "name": "created_at",
@@ -1306,6 +1402,123 @@
                     "account_id"
                 ]
             },
+            "Trail": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "name": "id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "nextval('trails_id_seq'::regclass)",
+                        "auto_increment": true,
+                        "comment": null,
+                        "generation": null,
+                        "example": 8499509062101955403
+                    },
+                    "action": {
+                        "name": "action",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "trailable_type": {
+                        "name": "trailable_type",
+                        "type_name": "varchar",
+                        "type": "character varying(255)",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "trailable_id": {
+                        "name": "trailable_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 2893137774772685923
+                    },
+                    "before": {
+                        "name": "before",
+                        "type_name": "json",
+                        "type": "json",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "after": {
+                        "name": "after",
+                        "type_name": "json",
+                        "type": "json",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "user_id": {
+                        "name": "user_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 2930674527490675519
+                    },
+                    "created_at": {
+                        "name": "created_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "updated_at": {
+                        "name": "updated_at",
+                        "type_name": "timestamp",
+                        "type": "timestamp(0) without time zone",
+                        "collation": null,
+                        "nullable": true,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null
+                    },
+                    "trailable": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Trail"
+                    }
+                },
+                "required": [
+                    "id",
+                    "action",
+                    "trailable_type",
+                    "trailable_id"
+                ]
+            },
             "Transaction": {
                 "type": "object",
                 "properties": {
@@ -1319,7 +1532,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 9111009187423847084
+                        "example": 2580888478578880285
                     },
                     "description": {
                         "name": "description",
@@ -1377,7 +1590,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 4902182118993272021
+                        "example": 1707589234152206924
                     },
                     "fee": {
                         "name": "fee",
@@ -1389,7 +1602,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 8656536049896943117
+                        "example": 2519270271345203068
                     },
                     "total": {
                         "name": "total",
@@ -1401,7 +1614,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 6503405272646281521
+                        "example": 3838293123983492826
                     },
                     "transaction_type_id": {
                         "name": "transaction_type_id",
@@ -1413,7 +1626,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 2463213950664849240
+                        "example": 5277370541158452834
                     },
                     "account_id": {
                         "name": "account_id",
@@ -1425,7 +1638,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 3448539040331682055
+                        "example": 3861982035324888379
                     },
                     "payee_id": {
                         "name": "payee_id",
@@ -1437,7 +1650,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 7364709634477749962
+                        "example": 3492141898236111116
                     },
                     "created_at": {
                         "name": "created_at",
@@ -1479,6 +1692,13 @@
                             "type": "object",
                             "$ref": "#/components/schemas/Subledger"
                         }
+                    },
+                    "trails": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/Trail"
+                        }
                     }
                 },
                 "required": [
@@ -1504,7 +1724,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 7487525961969556401
+                        "example": 2284066304369112616
                     },
                     "name": {
                         "name": "name",
@@ -1596,7 +1816,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 6981776185188582368
+                        "example": 1681050145276589711
                     },
                     "name": {
                         "name": "name",
@@ -1663,7 +1883,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 1103722226295023098
+                        "example": 7556246238360383553
                     },
                     "profile_photo_path": {
                         "name": "profile_photo_path",
