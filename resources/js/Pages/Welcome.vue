@@ -1,5 +1,5 @@
 <script setup>
-import {Head, Link} from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
     canLogin: {
@@ -27,7 +27,7 @@ function handleImageError() {
 </script>
 
 <template>
-    <Head title="Welcome"/>
+    <Head title="Welcome" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/80">
         <img
             id="background"
@@ -98,7 +98,7 @@ function handleImageError() {
                                 <a
                                     href="https://github.com/Aluisio-Pires/luizalabs"
                                     class="text-blue-600 hover:underline"
-                                >https://github.com/Aluisio-Pires/luizalabs</a
+                                    >https://github.com/Aluisio-Pires/luizalabs</a
                                 >
                             </h3>
                         </header>
@@ -289,140 +289,140 @@ function handleImageError() {
                                     <a
                                         href="https://laravel.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Laravel</a
+                                        >Laravel</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://vuejs.org/"
                                         class="text-blue-600 hover:underline"
-                                    >Vue.js</a
+                                        >Vue.js</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://inertiajs.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Inertia.js</a
+                                        >Inertia.js</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://jetstream.laravel.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Laravel Jetstream</a
+                                        >Laravel Jetstream</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://tailwindcss.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Tailwind CSS</a
+                                        >Tailwind CSS</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://www.postgresql.org/"
                                         class="text-blue-600 hover:underline"
-                                    >PostgreSQL</a
+                                        >PostgreSQL</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://redis.io/"
                                         class="text-blue-600 hover:underline"
-                                    >Redis</a
+                                        >Redis</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://reverb.laravel.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Laravel Reverb</a
+                                        >Laravel Reverb</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://laravel.com/docs/sail"
                                         class="text-blue-600 hover:underline"
-                                    >Laravel Sail</a
+                                        >Laravel Sail</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://pestphp.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Pest</a
+                                        >Pest</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://laravel.com/docs/pint"
                                         class="text-blue-600 hover:underline"
-                                    >Laravel Pint</a
+                                        >Laravel Pint</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://larastan.org/"
                                         class="text-blue-600 hover:underline"
-                                    >Larastan</a
+                                        >Larastan</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://github.com/rectorphp/rector"
                                         class="text-blue-600 hover:underline"
-                                    >Rector</a
+                                        >Rector</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://swagger.io/"
                                         class="text-blue-600 hover:underline"
-                                    >Swagger</a
+                                        >Swagger</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://www.docker.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Docker</a
+                                        >Docker</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://getcomposer.org/"
                                         class="text-blue-600 hover:underline"
-                                    >Composer</a
+                                        >Composer</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://nodejs.org/"
                                         class="text-blue-600 hover:underline"
-                                    >Node.js & NPM</a
+                                        >Node.js & NPM</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://git-scm.com/"
                                         class="text-blue-600 hover:underline"
-                                    >Git</a
+                                        >Git</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://github.com/"
                                         class="text-blue-600 hover:underline"
-                                    >GitHub</a
+                                        >GitHub</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://docs.microsoft.com/pt-br/windows/wsl/"
                                         class="text-blue-600 hover:underline"
-                                    >WSL</a
+                                        >WSL</a
                                     >
                                 </li>
                             </ul>
@@ -441,21 +441,21 @@ function handleImageError() {
                                     <a
                                         href="https://docs.docker.com/get-docker/"
                                         class="text-blue-600 hover:underline"
-                                    >Docker</a
+                                        >Docker</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://getcomposer.org/download/"
                                         class="text-blue-600 hover:underline"
-                                    >Composer</a
+                                        >Composer</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                         href="https://nodejs.org/en/download/"
                                         class="text-blue-600 hover:underline"
-                                    >Node.js e NPM</a
+                                        >Node.js e NPM</a
                                     >
                                 </li>
                             </ul>
@@ -527,7 +527,7 @@ npm run build</code></pre>
                                     <a
                                         href="http://127.0.0.1:9000/documentation"
                                         class="text-blue-600 hover:underline"
-                                    >http://127.0.0.1:9000/documentation</a
+                                        >http://127.0.0.1:9000/documentation</a
                                     >
                                 </li>
                                 <li>(Opcional) Crie um alias para o sail:</li>

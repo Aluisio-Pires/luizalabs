@@ -89,10 +89,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     placeholder=""
                 />
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.name"
-                />
+                <InputError class="mt-2" :message="form.errors.name" />
             </div>
             <div class="mt-4">
                 <InputLabel for="description" value="Descrição" />
@@ -103,10 +100,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     placeholder="Opcional"
                 />
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.description"
-                />
+                <InputError class="mt-2" :message="form.errors.description" />
             </div>
             <div class="mt-4">
                 <InputLabel for="value" value="Valor" />
