@@ -61,6 +61,6 @@ class AccountController extends APIController
     {
         Gate::authorize('view', $account);
 
-        return $this->response(['account' => $account]);
+        return $this->response(['account' => $account->load(['transactions', 'inflows', 'subledgers', 'trails'])]);
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\FeeController;
 use App\Http\Controllers\API\SubledgerController;
+use App\Http\Controllers\API\TrailController;
 use App\Http\Controllers\API\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
@@ -24,5 +25,6 @@ Route::group([
         Route::apiResource('/accounts', AccountController::class)->except(['update', 'destroy']);
         Route::apiResource('/fees', FeeController::class);
         Route::apiResource('/subledgers', SubledgerController::class)->except('store', 'destroy');
+        Route::apiResource('/trails', TrailController::class)->only('index', 'show');
     });
 });

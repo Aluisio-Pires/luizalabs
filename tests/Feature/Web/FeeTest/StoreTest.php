@@ -15,7 +15,7 @@ test('can store fees', function (): void {
 
     $this->authRequest('post',
         route('fees.store'),
-        Response::HTTP_CREATED,
+        Response::HTTP_FOUND,
         $request
     );
 });

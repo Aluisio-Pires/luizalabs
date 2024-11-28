@@ -62,7 +62,7 @@ class TransactionController extends APIController
     {
         Gate::authorize('view', $transaction);
 
-        return $this->response(['transaction' => $transaction]);
+        return $this->response(['transaction' => $transaction->load(['subledgers', 'trails'])]);
     }
 
     /**

@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class FeeController extends Controller
 {
@@ -46,7 +45,7 @@ class FeeController extends Controller
 
         Fee::create($request->validated());
 
-        return redirect(route('fees.index'), Response::HTTP_CREATED);
+        return redirect(route('fees.index'));
     }
 
     /**

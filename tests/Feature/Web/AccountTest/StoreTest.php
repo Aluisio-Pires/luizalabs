@@ -15,7 +15,7 @@ test('can create accounts', function (): void {
 
     $this->authRequest('post',
         route('accounts.store'),
-        Response::HTTP_CREATED,
+        Response::HTTP_FOUND,
         $request,
         $user
     );

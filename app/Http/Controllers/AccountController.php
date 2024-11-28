@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Models\Account;
 use App\Models\Subledger;
+use App\Models\Trail;
 use App\Models\Transaction;
 use App\Models\TransactionType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class AccountController extends Controller
 {
@@ -20,6 +20,7 @@ class AccountController extends Controller
      */
     public function index(): InertiaResponse
     {
+        dump(Trail::all());
         Gate::authorize('viewAny', Account::class);
         $accounts = Account::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
@@ -53,7 +54,7 @@ class AccountController extends Controller
             'credit_limit' => $request->credit_limit,
         ]);
 
-        return redirect(route('accounts.show', $account), Response::HTTP_CREATED);
+        return redirect(route('accounts.show', $account));
     }
 
     /**
