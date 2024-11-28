@@ -85,3 +85,51 @@ test('cant create transactions with wrong account', function (): void {
         $user
     );
 });
+
+test('can create transactions is idempotent', function (): void {
+    $user = User::factory()->create();
+    $account = Account::factory()->create([
+        'user_id' => $user->id,
+        'balance' => 1000,
+        'credit_limit' => 1000,
+    ])->fresh();
+    Fee::factory()->create([
+        'name' => 'Test Fee',
+        'description' => 'Test Fee Description',
+        'type' => 'fixed',
+        'value' => 5,
+        'transaction_type_id' => TransactionType::where('slug', 'saque')->first()->getKey(),
+    ]);
+    Fee::factory()->create([
+        'name' => 'Test Fee',
+        'description' => 'Test Fee Description',
+        'type' => 'percentage',
+        'value' => 10,
+        'transaction_type_id' => TransactionType::where('slug', 'saque')->first()->getKey(),
+    ]);
+
+    $request = [
+        'description' => 'Teste de Saque',
+        'type' => 'saque',
+        'amount' => '100.00',
+        'account_number' => $account->number,
+    ];
+
+    $response = $this->authRequest('post',
+        route('api.v1.transactions.store'),
+        Response::HTTP_CREATED,
+        $request,
+        $user
+    );
+
+    $this->authRequest('post',
+        route('api.v1.transactions.store'),
+        Response::HTTP_CONFLICT,
+        $request,
+        $user
+    );
+
+    $transaction = Transaction::where('id', $response->json('transaction.id'))->first();
+
+    expect($transaction->total === 115.00)->toBeTrue();
+});

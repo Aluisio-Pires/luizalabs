@@ -4,9 +4,12 @@ namespace App\Http\Requests;
 
 use App\Models\Account;
 use Closure;
+use Exception;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreTransactionRequest extends FormRequest
 {
@@ -68,11 +71,26 @@ class StoreTransactionRequest extends FormRequest
         ];
     }
 
+    /**
+     * @throws Exception
+     */
     protected function prepareForValidation(): void
     {
+        $this->ensureIdempotency();
+
         $this->merge([
             'account_number' => (string) $this->input('account_number'),
             'payee_number' => (string) $this->input('payee_number'),
         ]);
+    }
+
+    protected function ensureIdempotency(): void
+    {
+        $data = json_encode($this->all()) ?: 'Falha ao recuperar os dados';
+        $dataHash = hash('sha256', $data);
+        if (Cache::has($dataHash)) {
+            abort(Response::HTTP_CONFLICT, 'Transação duplicada');
+        }
+        Cache::put($dataHash, true, now()->addSeconds(15));
     }
 }

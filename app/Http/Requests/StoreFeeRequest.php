@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use App\Models\TransactionType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Cache;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreFeeRequest extends FormRequest
 {
@@ -49,6 +51,8 @@ class StoreFeeRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
+        $this->ensureIdempotency();
+
         if ($this->has('transaction_type_name')) {
             $transactionType = TransactionType::where('slug', $this->transaction_type_name)->first();
 
@@ -56,5 +60,15 @@ class StoreFeeRequest extends FormRequest
                 'transaction_type_id' => $transactionType?->getKey(),
             ]);
         }
+    }
+
+    protected function ensureIdempotency(): void
+    {
+        $data = json_encode($this->all()) ?: 'Falha ao recuperar os dados';
+        $dataHash = hash('sha256', $data);
+        if (Cache::has($dataHash)) {
+            abort(Response::HTTP_CONFLICT, 'Transação duplicada');
+        }
+        Cache::put($dataHash, true, now()->addSeconds(15));
     }
 }
