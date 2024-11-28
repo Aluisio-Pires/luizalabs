@@ -3,6 +3,8 @@
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'account');
+
 test('can create accounts', function (): void {
     $user = User::factory()->create();
     $request = [

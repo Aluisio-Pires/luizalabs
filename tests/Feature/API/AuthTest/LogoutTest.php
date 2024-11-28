@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'auth');
+
 test('can user logout', function (): void {
     $this->authRequest(
         'post',

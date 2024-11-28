@@ -8,6 +8,8 @@ use App\Models\TransactionType;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('web', 'transaction');
+
 test('can store saque transactions', function (): void {
     $user = User::factory()->create();
     $account = Account::factory()->create([

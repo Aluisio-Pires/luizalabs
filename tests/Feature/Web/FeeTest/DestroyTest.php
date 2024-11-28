@@ -3,6 +3,8 @@
 use App\Models\Fee;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('web', 'fee');
+
 test('can destroy a fee', function (): void {
     $fee = Fee::factory()->create();
 

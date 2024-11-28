@@ -3,6 +3,8 @@
 use App\Models\Fee;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'fee');
+
 test('can show a fee', function (): void {
     $fee = Fee::factory()->create();
 

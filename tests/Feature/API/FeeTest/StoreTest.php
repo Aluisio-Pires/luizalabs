@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'fee');
+
 test('can create fees', function (): void {
     $request = [
         'name' => 'Taxa Teste',

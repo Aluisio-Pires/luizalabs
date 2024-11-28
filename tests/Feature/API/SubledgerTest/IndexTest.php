@@ -5,6 +5,8 @@ use App\Models\Subledger;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'subledger');
+
 test('can index subledgers', function (): void {
     $user = User::factory()->has(
         Account::factory()->has(

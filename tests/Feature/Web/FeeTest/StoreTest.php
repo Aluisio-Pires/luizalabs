@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('web', 'fee');
+
 test('can store fees', function (): void {
     $request = [
         'name' => 'Taxa Teste',

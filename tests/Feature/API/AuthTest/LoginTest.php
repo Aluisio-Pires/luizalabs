@@ -3,6 +3,8 @@
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'auth');
+
 test('can user login', function (): void {
     $user = User::factory()->create();
     $request = [

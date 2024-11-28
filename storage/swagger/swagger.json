@@ -445,7 +445,7 @@
                                     "name",
                                     "type",
                                     "value",
-                                    "transaction_type_id"
+                                    "transaction_type_name"
                                 ],
                                 "properties": {
                                     "name": {
@@ -467,6 +467,9 @@
                                     "value": {
                                         "type": "string",
                                         "minLength": 0
+                                    },
+                                    "transaction_type_name": {
+                                        "type": "string"
                                     },
                                     "transaction_type_id": {
                                         "type": "string"
@@ -555,6 +558,23 @@
                                         "type": "string",
                                         "nullable": true,
                                         "maxLength": 1000
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "fixed",
+                                            "percentage"
+                                        ]
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "minLength": 0
+                                    },
+                                    "transaction_type_name": {
+                                        "type": "string"
+                                    },
+                                    "transaction_type_id": {
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -606,6 +626,23 @@
                                         "type": "string",
                                         "nullable": true,
                                         "maxLength": 1000
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "fixed",
+                                            "percentage"
+                                        ]
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "minLength": 0
+                                    },
+                                    "transaction_type_name": {
+                                        "type": "string"
+                                    },
+                                    "transaction_type_id": {
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -738,6 +775,11 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 255
+                                    },
                                     "description": {
                                         "type": "string",
                                         "nullable": true,
@@ -785,6 +827,11 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "maxLength": 255
+                                    },
                                     "description": {
                                         "type": "string",
                                         "nullable": true,
@@ -819,7 +866,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 1048754730800631064
+                        "example": 7108827034380069919
                     },
                     "number": {
                         "name": "number",
@@ -831,7 +878,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 1151757488505758719
+                        "example": 2577922782386860289
                     },
                     "balance": {
                         "name": "balance",
@@ -843,7 +890,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 4638368458743051223
+                        "example": 9191652710996668255
                     },
                     "credit_limit": {
                         "name": "credit_limit",
@@ -855,7 +902,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 4480227197596439938
+                        "example": 5087660073455393811
                     },
                     "user_id": {
                         "name": "user_id",
@@ -867,7 +914,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 3150583114191728480
+                        "example": 2287767893562094516
                     },
                     "deleted_at": {
                         "name": "deleted_at",
@@ -949,7 +996,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 7146313315401725527
+                        "example": 3225697720808459332
                     },
                     "name": {
                         "name": "name",
@@ -995,7 +1042,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 2381742443570653612
+                        "example": 2941157177390878200
                     },
                     "transaction_type_id": {
                         "name": "transaction_type_id",
@@ -1007,7 +1054,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 1533711813415751068
+                        "example": 2428519923579384958
                     },
                     "created_at": {
                         "name": "created_at",
@@ -1057,7 +1104,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 6960550360691308098
+                        "example": 2574677892878402184
                     },
                     "name": {
                         "name": "name",
@@ -1130,7 +1177,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 5314318768637374944
+                        "example": 8973819857069328455
                     },
                     "name": {
                         "name": "name",
@@ -1165,7 +1212,19 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 8446852821101083798
+                        "example": 1819427940331791715
+                    },
+                    "fee": {
+                        "name": "fee",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": "'0'::bigint",
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 3687031547414747372
                     },
                     "ledger_id": {
                         "name": "ledger_id",
@@ -1177,7 +1236,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 7827430984433375827
+                        "example": 8220897506170735211
                     },
                     "transaction_id": {
                         "name": "transaction_id",
@@ -1189,7 +1248,19 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 7652574066366316967
+                        "example": 8310291587117071829
+                    },
+                    "account_id": {
+                        "name": "account_id",
+                        "type_name": "int8",
+                        "type": "bigint",
+                        "collation": null,
+                        "nullable": false,
+                        "default": null,
+                        "auto_increment": false,
+                        "comment": null,
+                        "generation": null,
+                        "example": 7079841153188272663
                     },
                     "created_at": {
                         "name": "created_at",
@@ -1229,8 +1300,10 @@
                 "required": [
                     "id",
                     "value",
+                    "fee",
                     "ledger_id",
-                    "transaction_id"
+                    "transaction_id",
+                    "account_id"
                 ]
             },
             "Transaction": {
@@ -1246,7 +1319,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 9001371437532780983
+                        "example": 9111009187423847084
                     },
                     "description": {
                         "name": "description",
@@ -1304,7 +1377,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 7167570576892985955
+                        "example": 4902182118993272021
                     },
                     "fee": {
                         "name": "fee",
@@ -1316,7 +1389,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 1462378611975608917
+                        "example": 8656536049896943117
                     },
                     "total": {
                         "name": "total",
@@ -1328,7 +1401,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 7756920970652118384
+                        "example": 6503405272646281521
                     },
                     "transaction_type_id": {
                         "name": "transaction_type_id",
@@ -1340,7 +1413,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 2825283272446734052
+                        "example": 2463213950664849240
                     },
                     "account_id": {
                         "name": "account_id",
@@ -1352,7 +1425,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 4704940503795246169
+                        "example": 3448539040331682055
                     },
                     "payee_id": {
                         "name": "payee_id",
@@ -1364,7 +1437,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 8023333606174797140
+                        "example": 7364709634477749962
                     },
                     "created_at": {
                         "name": "created_at",
@@ -1431,7 +1504,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 7187968380753162538
+                        "example": 7487525961969556401
                     },
                     "name": {
                         "name": "name",
@@ -1523,7 +1596,7 @@
                         "auto_increment": true,
                         "comment": null,
                         "generation": null,
-                        "example": 6534701299300778878
+                        "example": 6981776185188582368
                     },
                     "name": {
                         "name": "name",
@@ -1590,7 +1663,7 @@
                         "auto_increment": false,
                         "comment": null,
                         "generation": null,
-                        "example": 3076665531523121620
+                        "example": 1103722226295023098
                     },
                     "profile_photo_path": {
                         "name": "profile_photo_path",

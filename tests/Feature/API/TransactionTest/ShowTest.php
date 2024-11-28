@@ -5,6 +5,8 @@ use App\Models\Transaction;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'transaction');
+
 test('can show a transaction', function (): void {
     $user = User::factory()->has(
         Account::factory()->has(

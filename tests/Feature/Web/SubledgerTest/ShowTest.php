@@ -5,6 +5,8 @@ use App\Models\Subledger;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('web', 'subledger');
+
 test('can show a subledger', function (): void {
     $user = User::factory()->has(
         Account::factory()->has(

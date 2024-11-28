@@ -7,6 +7,8 @@ use App\Models\TransactionType;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'transaction');
+
 test('can create transactions', function (): void {
     $user = User::factory()->create();
     $account = Account::factory()->create([

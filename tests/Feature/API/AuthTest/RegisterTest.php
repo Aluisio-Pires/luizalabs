@@ -2,6 +2,8 @@
 
 use Symfony\Component\HttpFoundation\Response;
 
+pest()->group('api', 'auth');
+
 test('can user register', function (): void {
     $request = [
         'email' => fake()->email,
