@@ -91,8 +91,7 @@ const submit = () => {
                 />
                 <InputError
                     class="mt-2"
-                    v-for="error in form.errors.name"
-                    :message="error"
+                    :message="form.errors.name"
                 />
             </div>
             <div class="mt-4">
@@ -106,8 +105,7 @@ const submit = () => {
                 />
                 <InputError
                     class="mt-2"
-                    v-for="error in form.errors.description"
-                    :message="error"
+                    :message="form.errors.description"
                 />
             </div>
             <div class="mt-4">
