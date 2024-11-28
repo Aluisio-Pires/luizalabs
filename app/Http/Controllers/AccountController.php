@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Models\Account;
 use App\Models\Subledger;
-use App\Models\Trail;
 use App\Models\Transaction;
 use App\Models\TransactionType;
 use Illuminate\Http\RedirectResponse;

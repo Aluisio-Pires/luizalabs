@@ -235,6 +235,7 @@ class TransactionService
         $ledger = Ledger::where('name', $tipo)->first();
 
         Subledger::create([
+            'description' => $transaction->description,
             'value' => $tipo === 'Saída' ? $transaction->total : $transaction->amount,
             'fee' => $tipo === 'Saída' ? $transaction->fee : 0,
             'ledger_id' => $ledger->id,
