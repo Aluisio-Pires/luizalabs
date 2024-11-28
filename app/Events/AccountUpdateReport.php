@@ -15,6 +15,8 @@ class AccountUpdateReport implements ShouldBroadcast
 
     /**
      * Create a new event instance.
+     *
+     * @param  array<string, mixed>  $result
      */
     public function __construct(public int $id, public array $result)
     {
@@ -38,6 +40,9 @@ class AccountUpdateReport implements ShouldBroadcast
         return 'account.report';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function broadcastWith(): array
     {
         return $this->result;

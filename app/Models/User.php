@@ -13,6 +13,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property-read string|null $profile_photo_url
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -28,7 +31,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -39,7 +42,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -51,7 +54,7 @@ class User extends Authenticatable
     /**
      * The accessors to append to the model's array form.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $appends = [
         'profile_photo_url',
@@ -70,6 +73,9 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * @return HasMany<Account,$this>
+     */
     public function accounts(): HasMany
     {
         return $this->hasMany(Account::class);

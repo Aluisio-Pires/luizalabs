@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Account;
+use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class StoreTransactionRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, ValidationRule|list<Closure|string>|string>
      */
     public function rules(): array
     {
@@ -53,6 +54,9 @@ class StoreTransactionRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function attributes(): array
     {
         return [

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Micron;
+use Database\Factories\AccountFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
+    /** @use HasFactory<AccountFactory> */
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -24,21 +26,33 @@ class Account extends Model
         'credit_limit' => Micron::class,
     ];
 
+    /**
+     * @return BelongsTo<User,$this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return HasMany<Transaction,$this>
+     */
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
 
+    /**
+     * @return HasMany<Transaction,$this>
+     */
     public function inflows(): HasMany
     {
         return $this->hasMany(Transaction::class, 'payee_id');
     }
 
+    /**
+     * @return HasMany<Subledger,$this>
+     */
     public function subledgers(): HasMany
     {
         return $this->hasMany(Subledger::class, 'account_id');

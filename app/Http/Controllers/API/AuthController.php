@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\PersonalAccessToken;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends APIController
@@ -72,9 +71,7 @@ class AuthController extends APIController
     {
         $token = $request->user()->currentAccessToken();
 
-        if ($token instanceof PersonalAccessToken) {
-            $token->delete();
-        }
+        $token->delete();
 
         return $this->response(['message' => 'Logout efetuado com sucesso.']);
     }

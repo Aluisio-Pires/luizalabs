@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Subledger;
 use Gate;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class SubledgerController extends Controller
 {
     /**
      * Display the specified resource.
      */
-    public function show(Subledger $subledger)
+    public function show(Subledger $subledger): Response
     {
         Gate::authorize('view', $subledger);
 

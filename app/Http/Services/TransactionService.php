@@ -16,11 +16,17 @@ use Log;
 
 class TransactionService
 {
+    /**
+     * @param  array<string, mixed>  $request
+     */
     public function create(array $request): ?Transaction
     {
         return $this->createTransaction($request);
     }
 
+    /**
+     * @param  array<string, mixed>  $request
+     */
     private function createTransaction(array $request): Transaction
     {
         $transactionType = $this->findTransactionType($request['type']);
@@ -55,7 +61,7 @@ class TransactionService
         return Account::where('number', $accountNumber)->first();
     }
 
-    private function calculateFee(int $amount, TransactionType $transactionType): int
+    private function calculateFee(int $amount, TransactionType $transactionType): float
     {
         $total = 0;
         $fees = $transactionType->fees()->get();
@@ -68,9 +74,12 @@ class TransactionService
             }
         }
 
-        return $total;
+        return (float) $total;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function process(Transaction $transaction): array
     {
         $account = $transaction->account;
@@ -90,6 +99,9 @@ class TransactionService
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function handleTransaction(Transaction $transaction, Account $account): array
     {
         return match ($transaction->type) {
@@ -105,6 +117,9 @@ class TransactionService
         return $value <= $account->balance + $account->credit_limit;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function deposit(Account $account, Transaction $transaction): array
     {
         $account->update([
@@ -125,6 +140,9 @@ class TransactionService
         return $this->completeTransaction($transaction);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function withdraw(Account $account, Transaction $transaction): array
     {
         $account->update([
@@ -145,6 +163,9 @@ class TransactionService
         return $this->completeTransaction($transaction);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function transfer(Account $account, Transaction $transaction): array
     {
         $this->withdraw($account, $transaction);
@@ -167,6 +188,9 @@ class TransactionService
         return $this->completeTransaction($transaction);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function failTransaction(Transaction $transaction, ?string $message = null): array
     {
         $transaction->update([
@@ -185,6 +209,9 @@ class TransactionService
         return $result;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private function completeTransaction(Transaction $transaction): array
     {
         $transaction->update([
