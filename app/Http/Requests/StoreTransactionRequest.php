@@ -29,7 +29,7 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'max:1000'],
             'type' => ['required', 'string', 'max:255', 'exists:transaction_types,slug'],
             'amount' => ['required', 'decimal:2', 'min:0'],
             'account_number' => [
