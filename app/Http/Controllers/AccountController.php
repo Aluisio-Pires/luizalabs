@@ -20,7 +20,6 @@ class AccountController extends Controller
      */
     public function index(): InertiaResponse
     {
-        dump(Trail::all());
         Gate::authorize('viewAny', Account::class);
         $accounts = Account::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
